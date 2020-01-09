@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @description:
@@ -16,20 +17,23 @@ import javax.servlet.http.HttpServletRequest;
  * @version: 1.0.0
  * @modified By:
  */
+/*@CrossOrigin前后端分离支持跨域*/
 @RestController
+@CrossOrigin
 @RequestMapping("/buildingmaterials_user")
 public class UserController {
 
     @Autowired
     UserService userService;
+
     // 增加
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public ResObject<User> updateFlowForm(HttpServletRequest request, @RequestBody ReqObject<User> data) {
+    public ResObject<User> updateFlowForm(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<User> data) {
 
         User dataObject = data.getObject();
         User user = userService.create(dataObject);
-        return new ResObject<>(null,user );
+        return new ResObject<>(null, user);
 
     }
 
