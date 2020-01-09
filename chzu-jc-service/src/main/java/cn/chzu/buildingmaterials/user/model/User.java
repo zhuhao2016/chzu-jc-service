@@ -8,8 +8,11 @@ package cn.chzu.buildingmaterials.user.model;
  * @modified By:
  */
 public class User {
+    //唯一id
     private String id;
+    //用户名
     private String username;
+    //用户密码
     private String password;
 
     public String getId() {
