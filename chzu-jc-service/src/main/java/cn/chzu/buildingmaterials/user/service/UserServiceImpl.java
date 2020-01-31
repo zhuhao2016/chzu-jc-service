@@ -28,10 +28,9 @@ public class UserServiceImpl implements UserService {
         if( id == null || id.isEmpty() ){
             user.setId( UUID.getUUID() );
         }
-
+        user.setMsg("用户创建成功");
         int i = userMapper.create(user);
         System.out.println(i);
-
         return user;
     }
 }

@@ -14,6 +14,8 @@ public class User {
     private String username;
     //用户密码
     private String password;
+    //提示信息
+    private String msg;
 
     public String getId() {
         return id;
@@ -39,6 +41,13 @@ public class User {
         this.password = password;
     }
 
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     @Override
     public String toString() {
@@ -46,6 +55,7 @@ public class User {
                 "id='" + id + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", msg='" + msg + '\'' +
                 '}';
     }
 }

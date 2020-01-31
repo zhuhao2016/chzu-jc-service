@@ -1,11 +1,11 @@
 package cn.chzu.conf.common;
 
-import java.io.Serializable;
-
 import cn.chzu.conf.exception.ZycException;
 import cn.chzu.conf.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.Serializable;
 
 
 
@@ -36,6 +36,10 @@ public class ResObject<T> implements Serializable {
 	// 返回数据
 	
 	private T object;
+
+	/*//返回信息
+	private String msg;*/
+
 
 	private Exception exception;
 
@@ -137,4 +141,11 @@ public class ResObject<T> implements Serializable {
 		return exception;
 	}
 
+	/*public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}*/
 }
