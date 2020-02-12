@@ -66,8 +66,6 @@ public class UserController {
         User user = userService.login(dataObject);
         session.setAttribute("id", user.getId());
         session.setAttribute("username", user.getUsername());
-        session.setAttribute("classification", user.getClassification());
-
         return new ResObject<>(null, user);
 
     }
