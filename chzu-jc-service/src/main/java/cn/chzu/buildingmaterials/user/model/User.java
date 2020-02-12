@@ -1,5 +1,7 @@
 package cn.chzu.buildingmaterials.user.model;
 
+import cn.chzu.base.model.Prompt;
+
 /**
  * @description:
  * @author: zhu_hao
@@ -7,15 +9,23 @@ package cn.chzu.buildingmaterials.user.model;
  * @version: 1.0.0
  * @modified By:
  */
-public class User {
+public class User extends Prompt {
     //唯一id
     private String id;
     //用户名
     private String username;
     //用户密码
     private String password;
-    //提示信息
-    private String msg;
+    //所属店铺编号
+    private String classification;
+    //电话号码
+    private String phoneNumber;
+    //性别
+    private String sex;
+    //角色
+    private String roleId;
+    //用户创建时间
+    private String createTime;
 
     public String getId() {
         return id;
@@ -41,12 +51,44 @@ public class User {
         this.password = password;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getClassification() {
+        return classification;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setClassification(String classification) {
+        this.classification = classification;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     @Override
@@ -55,7 +97,11 @@ public class User {
                 "id='" + id + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", msg='" + msg + '\'' +
+                ", classification='" + classification + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", sex='" + sex + '\'' +
+                ", roleId='" + roleId + '\'' +
+                ", createTime='" + createTime + '\'' +
                 '}';
     }
 }

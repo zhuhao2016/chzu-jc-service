@@ -1,5 +1,6 @@
 package cn.chzu.buildingmaterials.user.dao;
 
+
 import cn.chzu.buildingmaterials.user.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,7 +13,14 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserMapper {
-    // 增加
-    public int create( User user);
+    // 创建用户
+    public int create(User user);
+
+    //后台用户登录
+    public User login(User user);
+
+    //根据用户名查询
+    public User findUserName(String goodsName);
+
 
 }

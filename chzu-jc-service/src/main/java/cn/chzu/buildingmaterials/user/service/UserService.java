@@ -11,6 +11,8 @@ import cn.chzu.buildingmaterials.user.model.User;
  */
 public interface UserService {
 
-    User create( User user);
+    public User create(User user);
 
+    //后台用户登录
+    public User login(User user);
 }

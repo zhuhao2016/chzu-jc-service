@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chzu.buildingmaterials.storegoods.dao.StoreMapper">
+    <resultMap id="BaseResultMap" type="cn.chzu.buildingmaterials.storegoods.model.Store">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="store_name" property="storeName" jdbcType="VARCHAR"/>
+        <result column="goods_name" property="goodsName" jdbcType="VARCHAR"/>
+        <result column="sales_number" property="salesNumber" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="VARCHAR"/>
+        <result column="sales_price" property="salesPrice" jdbcType="VARCHAR"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="classification" property="classification" jdbcType="VARCHAR"/>
+		<result column="measure" property="measure" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		id, store_name, goods_name, sales_number, price,
+		sales_price, remarks, classification, measure
+	</sql>
+
+    <!-- 新增商品 -->
+    <insert id="add" parameterType="cn.chzu.buildingmaterials.storegoods.model.Store">
+		insert into storegoodslist
+			(id, store_name, goods_name, sales_number, price,
+		sales_price, remarks, classification, measure)
+		values (
+		#{id,jdbcType=VARCHAR},
+		#{storeName,jdbcType=VARCHAR},
+		#{goodsName,jdbcType=VARCHAR},
+		#{salesNumber,jdbcType=VARCHAR},
+		#{price,jdbcType=VARCHAR},
+		#{salesPrice,jdbcType=VARCHAR},
+		#{remarks,jdbcType=VARCHAR},
+		#{classification,jdbcType=VARCHAR},
+		#{measure,jdbcType=VARCHAR}
+		)
+	</insert>
+
+    <!-- 根据goodsName查询 -->
+    <select id="findGoodsName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from storegoodslist
+        where goods_name = #{goodsName,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 查询所有,并排序 -->
+    <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select *
+		from storegoodslist
+		where classification = #{classification,jdbcType=VARCHAR}
+		order by id desc
+	</select>
+
+    <!-- 商品名模糊查询 -->
+    <select id="findByGoodsName" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select *
+		from storegoodslist
+		where goods_name like '%${goodsName,jdbcType=VARCHAR}%'
+		order by id desc
+	</select>
+
+    <!-- 删除单个商品 -->
+    <delete id="delete" parameterType="java.lang.String">
+		delete from storegoodslist
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+    <!-- 根据id修改 -->
+	<update id="updateById" parameterType="cn.chzu.buildingmaterials.storegoods.model.Store">
+			update storegoodslist
+			<set>
+				<if test="salesNumber != null">
+					sales_number = #{salesNumber,jdbcType=VARCHAR},
+				</if>
+				<if test="price != null">
+					price = #{price,jdbcType=VARCHAR},
+				</if>
+				<if test="salesPrice != null">
+					sales_price = #{salesPrice,jdbcType=VARCHAR},
+				</if>
+				<if test="remarks != null">
+					remarks = #{remarks,jdbcType=VARCHAR},
+				</if>
+			</set>
+			where id = #{id,jdbcType=VARCHAR}
+	</update>
+</mapper>
+
