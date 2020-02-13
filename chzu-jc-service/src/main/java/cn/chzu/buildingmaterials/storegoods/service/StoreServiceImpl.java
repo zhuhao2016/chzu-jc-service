@@ -38,11 +38,9 @@ public class StoreServiceImpl implements StoreService {
             if (id == null || id.isEmpty()) {
                 store.setId(UUID.getUUID());
             }
-          /*  商品类型
-            store.setClassification("0");*/
+
             store.setStoreName("太平建材市场");
             storeMapper.add(store);
-            System.out.println(store.getClassification());
             store.setMsg("成功新增商品！");
         }
         System.out.println(store.getMsg());

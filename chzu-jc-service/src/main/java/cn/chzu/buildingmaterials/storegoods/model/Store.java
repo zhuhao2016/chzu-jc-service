@@ -23,7 +23,7 @@ public class Store extends Prompt {
     private String price;
     //售价
     private String salesPrice;
-    //备注
+    //商品简介
     private String remarks;
     //商品类别
     private String classification;
