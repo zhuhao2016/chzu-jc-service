@@ -53,6 +53,8 @@ public class UserServiceImpl implements UserService {
         user.setRoleId("管理员");
         //密码MD5加密
         user.setPassword(KEMD5Utils.MD5(psw));
+        //设置默认用户头像
+        user.setAvatar("http://localhost:9999/avatar/1.jpg");
         int i = userMapper.create(user);
         if (i == 1) {
             user.setMsg("用户创建成功!");

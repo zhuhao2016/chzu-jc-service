@@ -94,9 +94,9 @@ public class UserController {
         String originalFilename = file.getOriginalFilename();
         //获取后缀
         String substring = originalFilename.substring(originalFilename.lastIndexOf("."));
-        if (substring != ".jpg" || substring != ".png" || substring != ".gif") {
+       /* if (substring != ".jpg" || substring != ".png" || substring != ".gif") {
             return "上传文件格式错误！";
-        }
+        }*/
         //保存的文件名
         String dFileName = UUID.randomUUID() + substring;
         //保存路径
