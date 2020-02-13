@@ -5,6 +5,7 @@ import cn.chzu.buildingmaterials.user.model.User;
 import cn.chzu.conf.util.UUID;
 import cn.chzu.conf.util.md5.KEMD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -20,6 +21,9 @@ import java.util.Date;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    @Value("${com.image.path}")
+    private String pathURL;
 
     @Autowired
     UserMapper userMapper;
@@ -50,11 +54,11 @@ public class UserServiceImpl implements UserService {
         //输出当前时间
         System.out.println("输出当前时间:" + time);
         user.setCreateTime(time);
-        user.setRoleId("管理员");
         //密码MD5加密
         user.setPassword(KEMD5Utils.MD5(psw));
         //设置默认用户头像
         user.setAvatar("1.jpg");
+        user.setClassification("0");
         int i = userMapper.create(user);
         if (i == 1) {
             user.setMsg("用户创建成功!");
@@ -75,7 +79,9 @@ public class UserServiceImpl implements UserService {
         User login = userMapper.login(user);
 
         if (login != null) {
+            login.setAvatar(pathURL+login.getAvatar());
             login.setMsg("登录成功！");
+
             return login;
         } else {
             user.setMsg("用户名或密码错误！");
