@@ -23,7 +23,7 @@
 	<insert id="create" parameterType="cn.chzu.buildingmaterials.user.model.User">
 		insert into user
 			(id, username, password ,classification, phone_number,
-		sex, role_id, create_time)
+		sex, role_id, create_time, avatar)
 		values (
 		#{id,jdbcType=VARCHAR},
 		#{username,jdbcType=VARCHAR},
