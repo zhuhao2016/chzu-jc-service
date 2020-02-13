@@ -26,6 +26,8 @@ public class User extends Prompt {
     private String roleId;
     //用户创建时间
     private String createTime;
+    //用户头像地址
+    private String avatar;
 
     public String getId() {
         return id;
@@ -91,6 +93,14 @@ public class User extends Prompt {
         this.createTime = createTime;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -102,6 +112,7 @@ public class User extends Prompt {
                 ", sex='" + sex + '\'' +
                 ", roleId='" + roleId + '\'' +
                 ", createTime='" + createTime + '\'' +
+                ", avatar='" + avatar + '\'' +
                 '}';
     }
 }
