@@ -82,6 +82,12 @@
 				<if test="remarks != null">
 					remarks = #{remarks,jdbcType=VARCHAR},
 				</if>
+				<if test="classification != null">
+					classification = #{classification,jdbcType=VARCHAR},
+				</if>
+				<if test="measure != null">
+					measure = #{measure,jdbcType=VARCHAR},
+				</if>
 			</set>
 			where id = #{id,jdbcType=VARCHAR}
 	</update>

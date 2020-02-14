@@ -99,6 +99,7 @@ public class UserController {
         }*/
         //保存的文件名
         String dFileName = UUID.randomUUID() + substring;
+        System.out.println(dFileName);
         //保存路径
         //springboot 默认情况下只能加载 resource文件夹下静态资源文件
         // String path = "D:/idea-workspace/chzu/chzu-jc-service/chzu-jc-service/src/main/resources/static/image/";
