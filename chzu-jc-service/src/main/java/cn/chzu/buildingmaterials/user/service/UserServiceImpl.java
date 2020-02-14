@@ -80,6 +80,7 @@ public class UserServiceImpl implements UserService {
         User login = userMapper.login(user);
 
         if (login != null) {
+            //设置头像访问路径
             login.setAvatar(pathURL + login.getAvatar());
             login.setMsg("登录成功！");
 
