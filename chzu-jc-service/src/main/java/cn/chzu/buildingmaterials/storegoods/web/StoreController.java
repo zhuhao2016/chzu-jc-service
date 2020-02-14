@@ -60,8 +60,8 @@ public class StoreController {
     @ResponseBody
     public ResObject<List<Store>> findAll(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<Store> data) {
 
-        String classification = data.getObject().getClassification();
-        List<Store> all = storeService.findAll(classification);
+        String storeName = data.getObject().getStoreName();
+        List<Store> all = storeService.findAll(storeName);
         return new ResObject<>(null, all);
     }
 

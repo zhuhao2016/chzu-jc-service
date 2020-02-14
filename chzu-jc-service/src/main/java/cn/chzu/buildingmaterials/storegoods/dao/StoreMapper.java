@@ -19,7 +19,7 @@ public interface StoreMapper {
     public int add(Store store);
 
     //查询所有，分页展示
-    public List<Store> findAll(String classification);
+    public List<Store> findAll(String storeName);
 
     //根据GoodsName查询
     public Store findGoodsName(String goodsName);

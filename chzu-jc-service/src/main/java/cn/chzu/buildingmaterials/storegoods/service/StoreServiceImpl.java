@@ -51,9 +51,9 @@ public class StoreServiceImpl implements StoreService {
 
     //查询所有，分页展示
     @Override
-    public List<Store> findAll(String classification) {
+    public List<Store> findAll(String storeName) {
 
-        return storeMapper.findAll(classification);
+        return storeMapper.findAll(storeName);
     }
 
     //商品名模糊查询

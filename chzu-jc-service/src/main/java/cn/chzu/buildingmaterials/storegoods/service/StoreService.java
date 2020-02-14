@@ -16,7 +16,7 @@ public interface StoreService {
     Store add(Store store);
 
     //查询所有，分页展示
-    List<Store> findAll(String classification);
+    List<Store> findAll(String storeName);
 
     //商品名模糊查询
     List<Store> findByGoodsName(String goodsName);

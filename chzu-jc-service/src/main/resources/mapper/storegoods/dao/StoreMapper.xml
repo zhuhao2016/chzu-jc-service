@@ -48,7 +48,7 @@
     <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select *
 		from storegoodslist
-		where classification = #{classification,jdbcType=VARCHAR}
+		where store_name = #{storeName,jdbcType=VARCHAR}
 		order by id desc
 	</select>
 
