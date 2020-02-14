@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -120,6 +121,24 @@ public class UserController {
             e.printStackTrace();
             return "上传失败！";
         }
+
+    }
+
+    /**
+     * @param request
+     * @param response
+     * @return cn.chzu.conf.common.ResObject<java.util.List < cn.chzu.buildingmaterials.user.model.User>>
+     * @Title findAllUser
+     * @description 查询所有后台用户信息
+     * @author zhu_hao
+     * @date 2020/2/14 19:22
+     */
+    @RequestMapping(value = "/findAllUser", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObject<List<User>> findAllUser(HttpServletRequest request, HttpServletResponse response) {
+
+        List<User> allUser = userService.findAllUser();
+        return new ResObject<>(null, allUser);
 
     }
 

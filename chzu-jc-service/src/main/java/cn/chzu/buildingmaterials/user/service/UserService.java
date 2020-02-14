@@ -2,6 +2,8 @@ package cn.chzu.buildingmaterials.user.service;
 
 import cn.chzu.buildingmaterials.user.model.User;
 
+import java.util.List;
+
 /**
  * @description:
  * @author: zhu_hao
@@ -15,4 +17,6 @@ public interface UserService {
 
     //后台用户登录
     public User login(User user);
+    //查询所有后台用户信息
+    public List<User> findAllUser();
 }

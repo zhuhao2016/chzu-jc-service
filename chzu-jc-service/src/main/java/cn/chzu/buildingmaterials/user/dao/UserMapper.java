@@ -4,6 +4,8 @@ package cn.chzu.buildingmaterials.user.dao;
 import cn.chzu.buildingmaterials.user.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * @description:
  * @author: zhu_hao
@@ -21,6 +23,9 @@ public interface UserMapper {
 
     //根据用户名查询
     public User findUserName(String goodsName);
+
+    //查询所有后台用户信息
+    public List<User> findAllUser();
 
 
 }

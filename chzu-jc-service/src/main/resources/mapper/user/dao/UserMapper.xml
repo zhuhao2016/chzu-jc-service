@@ -59,7 +59,13 @@
 		</where>
 	</select>
 
-
+	<!-- 查询所有后台用户,并排序 -->
+	<select id="findAllUser" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List"/>
+		from user
+		order by username
+	</select>
 
 </mapper>
 

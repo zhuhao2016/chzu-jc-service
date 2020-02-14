@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @description:
@@ -79,7 +80,7 @@ public class UserServiceImpl implements UserService {
         User login = userMapper.login(user);
 
         if (login != null) {
-            login.setAvatar(pathURL+login.getAvatar());
+            login.setAvatar(pathURL + login.getAvatar());
             login.setMsg("登录成功！");
 
             return login;
@@ -87,6 +88,13 @@ public class UserServiceImpl implements UserService {
             user.setMsg("用户名或密码错误！");
             return user;
         }
+    }
+
+    //查询所有后台用户信息
+    @Override
+    public List<User> findAllUser() {
+
+        return userMapper.findAllUser();
     }
 
 
