@@ -23,7 +23,7 @@ public class StoreServiceImpl implements StoreService {
         String goodsName = store.getGoodsName();
         //商品不能为空
         if (store.getGoodsName() == null || store.getGoodsName().isEmpty()) {
-            store.setMsg("");
+            store.setMsg("商品不能为空！");
             System.out.println(store.getMsg());
             return store;
 

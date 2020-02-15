@@ -101,10 +101,10 @@ public class UserController {
         //保存的文件名
         String dFileName = UUID.randomUUID() + substring;
         System.out.println(dFileName);
-        //保存路径
-        //springboot 默认情况下只能加载 resource文件夹下静态资源文件
-        // String path = "D:/idea-workspace/chzu/chzu-jc-service/chzu-jc-service/src/main/resources/static/image/";
+        //windows保存路径
         String path = "D:/image/";
+        //Mac保存路径
+        //String path = "D:/image/";
         //生成保存文件
         File uploadFile = new File(path + dFileName);
         System.out.println(uploadFile);
@@ -138,6 +138,7 @@ public class UserController {
     public ResObject<List<User>> findAllUser(HttpServletRequest request, HttpServletResponse response) {
 
         List<User> allUser = userService.findAllUser();
+        //如果需要头像，使用增强for循环赋值
         return new ResObject<>(null, allUser);
 
     }
