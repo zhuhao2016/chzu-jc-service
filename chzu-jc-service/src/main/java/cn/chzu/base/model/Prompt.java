@@ -13,6 +13,9 @@ public abstract class Prompt implements Serializable {
     //信息提示
     private String msg;
 
+    //模糊查询字段
+    private String links;
+
     public String getMsg() {
         return msg;
     }
@@ -21,10 +24,19 @@ public abstract class Prompt implements Serializable {
         this.msg = msg;
     }
 
+    public String getLinks() {
+        return links;
+    }
+
+    public void setLinks(String links) {
+        this.links = links;
+    }
+
     @Override
     public String toString() {
         return "Prompt{" +
                 "msg='" + msg + '\'' +
+                ", links='" + links + '\'' +
                 '}';
     }
 }

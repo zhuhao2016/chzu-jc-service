@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chzu.buildingmaterials.member.dao.MemberMapper">
+    <resultMap id="BaseResultMap" type="cn.chzu.buildingmaterials.member.model.Member">
+        <id column="member_id" property="id" jdbcType="VARCHAR"/>
+        <result column="vipname" property="vipName" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="VARCHAR"/>
+        <result column="number" property="number" jdbcType="VARCHAR"/>
+        <result column="createAt" property="createAt" jdbcType="VARCHAR"/>
+        <result column="shopStore" property="shopStore" jdbcType="VARCHAR"/>
+		<result column="status" property="status" jdbcType="VARCHAR"/>
+
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		member_id, vipname, sex, age, number, createAt, shopStore, status
+	</sql>
+
+    <!-- 新增商品 -->
+    <insert id="add" parameterType="cn.chzu.buildingmaterials.member.model.Member">
+		insert into member
+			(member_id, vipname, sex, age, number, createAt, shopStore, status)
+		values (
+		#{id,jdbcType=VARCHAR},
+		#{vipName,jdbcType=VARCHAR},
+		#{sex,jdbcType=VARCHAR},
+		#{age,jdbcType=VARCHAR},
+		#{number,jdbcType=VARCHAR},
+		#{createAt,jdbcType=VARCHAR},
+		#{shopStore,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR}
+		)
+	</insert>
+
+    <!-- 根据findVipName查询 -->
+    <select id="findVipName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from member
+        where vipname = #{vipName,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 查询所有会员信息,并排序 -->
+    <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from member
+        order by vipname
+    </select>
+
+    <!--根据id修改-->
+	<update id="updateById" parameterType="cn.chzu.buildingmaterials.member.model.Member">
+			update member
+			<set>
+				<if test="sex != null">
+					sex = #{sex,jdbcType=VARCHAR},
+				</if>
+				<if test="age != null">
+					age = #{age,jdbcType=VARCHAR},
+				</if>
+				<if test="number != null">
+					number = #{number,jdbcType=VARCHAR},
+				</if>
+			</set>
+			where member_id = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<!--启用停用会员-->
+	<update id="updateStatus" parameterType="cn.chzu.buildingmaterials.member.model.Member">
+		update member
+		<set>
+			<if test="status != null">
+				status = #{status,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where member_id = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 删除单个会员 -->
+	<delete id="delete" parameterType="java.lang.String">
+		delete from member
+		where member_id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+	<!-- 模糊查询 -->
+	<select id="findByLinks" resultMap="BaseResultMap" parameterType="cn.chzu.buildingmaterials.member.model.Member">
+		select
+		<include refid="Base_Column_List"/>
+		from member
+		where
+				vipname like '%${vipName,jdbcType=VARCHAR}%' or shopStore like '%${shopStore,jdbcType=VARCHAR}%'
+	</select>
+
+</mapper>
+
