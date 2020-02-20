@@ -109,7 +109,7 @@ public class MemberController {
      * @param data
      * @return cn.chzu.conf.common.ResObject<java.util.List < cn.chzu.clothing.member.model.Member>>
      * @Title findByLinks
-     * @description 根据会员名称或店铺名模糊查询
+     * @description 根据会员名称模糊查询
      * @author zhu_hao
      * @date 2020/2/16 14:02
      */

@@ -90,7 +90,7 @@
 		<include refid="Base_Column_List"/>
 		from member
 		where
-				vipname like '%${vipName,jdbcType=VARCHAR}%' or shopStore like '%${shopStore,jdbcType=VARCHAR}%'
+			vipname like concat('%',#{vipName},'%')
 	</select>
 
 </mapper>
