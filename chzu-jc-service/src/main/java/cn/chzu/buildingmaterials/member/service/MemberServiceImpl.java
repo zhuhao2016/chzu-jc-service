@@ -110,19 +110,18 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member updateStatus(Member member) {
 
-        Member member1 = memberMapper.updateStatus(member);
-        String status = member1.getStatus();
+        Member members = new Member();
+        String vipName = member.getVipName();
+        memberMapper.updateStatus(member);
+        Member name = memberMapper.findVipName(vipName);
+        String status = name.getStatus();
         String s;
         if (status.equals("1")) {
             s = "启用";
         } else {
             s = "停用";
         }
-        if (member1 != null) {
-            member.setMsg("会员状态修改成功！且当前状态为：" + s);
-        } else {
-            member.setMsg("会员状态修改失败！");
-        }
-        return member;
+        members.setMsg("会员状态修改成功！且当前状态为：" + s);
+        return members;
     }
 }

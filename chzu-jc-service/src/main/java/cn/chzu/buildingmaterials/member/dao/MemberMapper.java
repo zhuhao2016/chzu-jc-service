@@ -35,7 +35,7 @@ public interface MemberMapper {
     public List<Member> findByLinks(String links);
 
     //启用停用会员
-    public Member updateStatus(Member member);
+    public int updateStatus(Member member);
 
 
 }
