@@ -4,11 +4,10 @@ package cn.chzu.buildingmaterials.member.service;
 import cn.chzu.buildingmaterials.member.dao.MemberMapper;
 import cn.chzu.buildingmaterials.member.model.Member;
 import cn.chzu.conf.util.UUID;
+import cn.chzu.conf.util.time.CurrentTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -48,11 +47,8 @@ public class MemberServiceImpl implements MemberService {
             if (id == null || id.isEmpty()) {
                 member.setId(UUID.getUUID());
             }
-            SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             //获取当前时间
-            String time = sd.format(new Date());
-            //输出当前时间
-            System.out.println("输出当前时间:" + time);
+            String time = CurrentTime.newTime();
             member.setCreateAt(time);
             //设置会员默认启动
             member.setStatus("1");

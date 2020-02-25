@@ -4,12 +4,11 @@ import cn.chzu.buildingmaterials.user.dao.UserMapper;
 import cn.chzu.buildingmaterials.user.model.User;
 import cn.chzu.conf.util.UUID;
 import cn.chzu.conf.util.md5.KEMD5Utils;
+import cn.chzu.conf.util.time.CurrentTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,11 +48,8 @@ public class UserServiceImpl implements UserService {
         if (id == null || id.isEmpty()) {
             user.setId(UUID.getUUID());
         }
-        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //获取当前时间
-        String time = sd.format(new Date());
-        //输出当前时间
-        System.out.println("输出当前时间:" + time);
+        String time = CurrentTime.newTime();
         user.setCreateTime(time);
         //密码MD5加密
         user.setPassword(KEMD5Utils.MD5(psw));

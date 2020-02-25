@@ -18,7 +18,10 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //addResourceHandler是指你想在url请求的路径
         //addResourceLocations是图片存放的真实路径
+        //windows环境
         registry.addResourceHandler("/image/**").addResourceLocations("file:D://image/");
+        //Mac环境
+        //registry.addResourceHandler("/image/**").addResourceLocations("file:/Users/lujun/image/");
         WebMvcConfigurer.super.addResourceHandlers(registry);
     }
 }
