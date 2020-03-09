@@ -1,6 +1,8 @@
 package cn.chzu.buildingmaterials.storegoods.service;
 
 import cn.chzu.buildingmaterials.storegoods.model.Store;
+import cn.chzu.buildingmaterials.storegoods.model.StoreVo;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -26,5 +28,11 @@ public interface StoreService {
 
     //根据id修改
     Store updateById(Store store);
+
+    //根据分类类型查询该类型所有信息
+    public List<StoreVo> findAllKind(String kind);
+
+    //图片上传
+    public void imgFile(MultipartFile file);
 
 }

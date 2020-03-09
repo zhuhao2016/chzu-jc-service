@@ -3,10 +3,15 @@ package cn.chzu.buildingmaterials.storegoods.service;
 
 import cn.chzu.buildingmaterials.storegoods.dao.StoreMapper;
 import cn.chzu.buildingmaterials.storegoods.model.Store;
+import cn.chzu.buildingmaterials.storegoods.model.StoreVo;
 import cn.chzu.conf.util.UUID;
+import cn.chzu.conf.util.file.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,6 +21,11 @@ public class StoreServiceImpl implements StoreService {
     @Autowired
     StoreMapper storeMapper;
 
+    @Value("${com.image.path}")
+    private String pathURL;
+
+    //定义file全局变量
+    static String saveFile;
     //新增商品
     @Override
     public Store add(Store store) {
@@ -78,6 +88,7 @@ public class StoreServiceImpl implements StoreService {
         return store;
     }
 
+    //根据id修改
     @Override
     public Store updateById(Store store) {
 
@@ -89,6 +100,33 @@ public class StoreServiceImpl implements StoreService {
         }
 
         return store;
+    }
+
+    //根据分类类型查询该类型所有信息
+    @Override
+    public List<StoreVo> findAllKind(String kind) {
+        List<StoreVo> list = new ArrayList<>();
+        List<Store> allKind = storeMapper.findAllKind(kind);
+        for (Store str : allKind) {
+            StoreVo storeVo = new StoreVo();
+            storeVo.setId(str.getId());
+            storeVo.setImg(str.getImage());
+            storeVo.setGoodsName(str.getGoodsName());
+            storeVo.setSalesPrice(str.getSalesPrice());
+            storeVo.setStoreName(str.getStoreName());
+            storeVo.setSalesNumber(str.getSalesNumber());
+            list.add(storeVo);
+        }
+        return list;
+    }
+
+    //图片上传
+    @Override
+    public void imgFile(MultipartFile file) {
+
+        String fileName = FileUtils.saveFile(file);
+        saveFile=fileName;
+        System.out.println(saveFile);
     }
 
 

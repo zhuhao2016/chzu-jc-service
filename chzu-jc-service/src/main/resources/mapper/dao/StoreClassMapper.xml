@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chzu.buildingmaterials.storeclass.dao.StoreClassMapper">
+    <resultMap id="BaseResultMap" type="cn.chzu.buildingmaterials.storeclass.model.StoreClass">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="classification" property="classification" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		id, classification
+	</sql>
+
+    <!-- 新增分类 -->
+    <insert id="add" parameterType="cn.chzu.buildingmaterials.storeclass.model.StoreClass">
+		insert into storeclass
+			(id, classification)
+		values (
+		#{id,jdbcType=VARCHAR},
+		#{classification,jdbcType=VARCHAR}
+		)
+	</insert>
+
+    <!-- 根据classification查询 -->
+    <select id="findClassification" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from storeclass
+        where classification = #{classification,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 查询所有分类-->
+    <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from storeclass
+        order by classification
+    </select>
+
+    <!-- 删除-->
+    <delete id="deleteClassification" parameterType="java.lang.String">
+		delete from storeclass
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+</mapper>
+

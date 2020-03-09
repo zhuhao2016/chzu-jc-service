@@ -1,19 +1,22 @@
 package cn.chzu.buildingmaterials.storegoods.web;
 
 
+import cn.chzu.buildingmaterials.storeclass.model.StoreClass;
 import cn.chzu.buildingmaterials.storegoods.model.Store;
+import cn.chzu.buildingmaterials.storegoods.model.StoreVo;
 import cn.chzu.buildingmaterials.storegoods.service.StoreService;
 import cn.chzu.conf.common.ReqObject;
 import cn.chzu.conf.common.ResObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * @description:  商品管理
+ * @description: 商品管理
  * @author: zhu_hao
  * @date: Created in 2020/1/31 13:01
  * @version: 1.0.0
@@ -102,15 +105,16 @@ public class StoreController {
         Store delete = storeService.delete(id);
         return new ResObject<>(null, delete);
     }
+
     /**
-     * @Title updateById
-     * @description 根据id修改
-     * @author zhu_hao
-     * @date 2020/2/7 13:09
      * @param request
      * @param response
      * @param data
      * @return cn.chzu.conf.common.ResObject<cn.chzu.clothing.storegoods.model.Store>
+     * @Title updateById
+     * @description 根据id修改
+     * @author zhu_hao
+     * @date 2020/2/7 13:09
      */
     @RequestMapping(value = "/updateById", method = RequestMethod.POST)
     @ResponseBody
@@ -119,5 +123,40 @@ public class StoreController {
         Store dataObject = data.getObject();
         Store store = storeService.updateById(dataObject);
         return new ResObject<>(null, store);
+    }
+
+    /**
+     * @param request
+     * @param response
+     * @param data
+     * @return cn.chzu.conf.common.ResObject<java.util.List < cn.chzu.clothing.storegoods.model.StoreVo>>
+     * @Title findAllKind
+     * @description 根据分类类型查询该类型所有信息
+     * @author zhu_hao
+     * @date 2020/2/24 17:33
+     */
+    @RequestMapping(value = "/findAllKind", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObject<List<StoreVo>> findAllKind(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<StoreClass> data) {
+
+        String kind = data.getObject().getClassification();
+        List<StoreVo> allKind = storeService.findAllKind(kind);
+        return new ResObject<>(null, allKind);
+    }
+
+    /**
+     * @param file
+     * @return cn.chzu.conf.common.ResObject<java.lang.String>
+     * @Title imgFile
+     * @description 图片上传接口
+     * @author zhu_hao
+     * @date 2020/3/9 10:33
+     */
+    @RequestMapping(value = "/imgFile", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObject<String> imgFile(@RequestParam("imgFile") MultipartFile file) {
+
+        storeService.imgFile(file);
+        return new ResObject<>(null, "成功调用了接口");
     }
 }

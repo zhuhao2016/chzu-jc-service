@@ -26,10 +26,13 @@ public class Store extends Prompt {
     //商品简介
     private String remarks;
     //商品类别
-    private String classification;
-
+    private String kind;
     //计量单位
     private String measure;
+    //派发数量
+    private String cont;
+    //商品图片
+    private String image;
 
     public String getId() {
         return id;
@@ -87,12 +90,12 @@ public class Store extends Prompt {
         this.remarks = remarks;
     }
 
-    public String getClassification() {
-        return classification;
+    public String getKind() {
+        return kind;
     }
 
-    public void setClassification(String classification) {
-        this.classification = classification;
+    public void setKind(String kind) {
+        this.kind = kind;
     }
 
     public String getMeasure() {
@@ -101,6 +104,22 @@ public class Store extends Prompt {
 
     public void setMeasure(String measure) {
         this.measure = measure;
+    }
+
+    public String getCont() {
+        return cont;
+    }
+
+    public void setCont(String cont) {
+        this.cont = cont;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override
@@ -113,8 +132,10 @@ public class Store extends Prompt {
                 ", price='" + price + '\'' +
                 ", salesPrice='" + salesPrice + '\'' +
                 ", remarks='" + remarks + '\'' +
-                ", classification='" + classification + '\'' +
+                ", kind='" + kind + '\'' +
                 ", measure='" + measure + '\'' +
+                ", cont='" + cont + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }
