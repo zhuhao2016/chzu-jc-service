@@ -40,6 +40,7 @@ public class StoreServiceImpl implements StoreService {
         }
 
         //根据商品名称查询数据库，看是否已有该商品
+        // Store goodsName1 = storeMapper.findGoodsName(goodsName);
         Store goodsName1 = storeMapper.findGoodsName(goodsName);
         if (goodsName1 != null) {
             store.setMsg("该商品已存在，请重新输入！");
@@ -48,8 +49,14 @@ public class StoreServiceImpl implements StoreService {
             if (id == null || id.isEmpty()) {
                 store.setId(UUID.getUUID());
             }
+            if (saveFile == null) {
+                store.setMsg("图片上传失败！");
+                return store;
+            }
 
-            store.setStoreName("太平建材市场");
+            store.setStoreName("总店");
+            //设置图片访问地址
+            store.setImage(pathURL + saveFile);
             storeMapper.add(store);
             store.setMsg("成功新增商品！");
         }

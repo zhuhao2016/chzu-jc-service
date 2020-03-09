@@ -11,18 +11,19 @@
         <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
         <result column="kind" property="kind" jdbcType="VARCHAR"/>
 		<result column="measure" property="measure" jdbcType="VARCHAR"/>
+		<result column="image" property="image" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
 		id, store_name, goods_name, sales_number, price,
-		sales_price, remarks, kind, measure
+		sales_price, remarks, kind, measure, image
 	</sql>
 
     <!-- 新增商品 -->
     <insert id="add" parameterType="cn.chzu.buildingmaterials.storegoods.model.Store">
 		insert into storegoodslist
 			(id, store_name, goods_name, sales_number, price,
-		sales_price, remarks, kind, measure)
+		sales_price, remarks, kind, measure, image)
 		values (
 		#{id,jdbcType=VARCHAR},
 		#{storeName,jdbcType=VARCHAR},
@@ -32,7 +33,8 @@
 		#{salesPrice,jdbcType=VARCHAR},
 		#{remarks,jdbcType=VARCHAR},
 		#{kind,jdbcType=VARCHAR},
-		#{measure,jdbcType=VARCHAR}
+		#{measure,jdbcType=VARCHAR},
+		#{image,jdbcType=VARCHAR}
 		)
 	</insert>
 
