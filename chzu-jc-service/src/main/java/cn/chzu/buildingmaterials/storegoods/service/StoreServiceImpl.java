@@ -124,7 +124,6 @@ public class StoreServiceImpl implements StoreService {
             storeVo.setSalesNumber(str.getSalesNumber());
             list.add(storeVo);
         }
-
         return list;
     }
 
