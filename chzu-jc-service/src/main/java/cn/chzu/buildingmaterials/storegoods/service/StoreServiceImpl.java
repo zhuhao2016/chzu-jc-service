@@ -26,6 +26,7 @@ public class StoreServiceImpl implements StoreService {
 
     //定义file全局变量
     static String saveFile;
+
     //新增商品
     @Override
     public Store add(Store store) {
@@ -132,7 +133,7 @@ public class StoreServiceImpl implements StoreService {
     public void imgFile(MultipartFile file) {
 
         String fileName = FileUtils.saveFile(file);
-        saveFile=fileName;
+        saveFile = fileName;
         System.out.println(saveFile);
     }
 

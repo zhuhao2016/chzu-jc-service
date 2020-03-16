@@ -67,5 +67,21 @@
 		order by username
 	</select>
 
+	<!--根据id修改-->
+	<update id="updateById" parameterType="cn.chzu.buildingmaterials.user.model.User">
+		update user
+		<set>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="phoneNumber != null">
+				phone_number = #{phoneNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
 </mapper>
 

@@ -143,5 +143,23 @@ public class UserController {
 
     }
 
+    /**
+     * @param request
+     * @param response
+     * @param data
+     * @return cn.chzu.conf.common.ResObject<cn.chzu.buildingmaterials.user.model.User>
+     * @Title updateById
+     * @description 根据id修改密码，电话号码，性别
+     * @author zhu_hao
+     * @date 2020/3/16 15:41
+     */
+    @RequestMapping(value = "/updateById", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObject<User> updateById(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<User> data) {
+
+        User object = data.getObject();
+        User user = userService.updateById(object);
+        return new ResObject<>(null, user);
+    }
 
 }

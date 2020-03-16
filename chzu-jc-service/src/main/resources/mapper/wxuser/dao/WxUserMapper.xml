@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chzu.buildingmaterials.wxuser.dao.WxUserMapper">
+    <resultMap id="BaseResultMap" type="cn.chzu.buildingmaterials.wxuser.model.WxUser">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="username" property="userName" jdbcType="VARCHAR"/>
+        <result column="password" property="passWord" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="created" property="created" jdbcType="VARCHAR"/>
+        <result column="updated" property="updated" jdbcType="VARCHAR"/>
+		<result column="status" property="status" jdbcType="VARCHAR"/>
+		<result column="is_mobile_check" property="isMobileCheck" jdbcType="VARCHAR"/>
+		<result column="sex" property="sex" jdbcType="VARCHAR"/>
+		<result column="member_id" property="memberId" jdbcType="VARCHAR"/>
+		<result column="birthday" property="birthday" jdbcType="VARCHAR"/>
+		<result column="last_login_time" property="lastLoginTime" jdbcType="VARCHAR"/>
+		<result column="shopping_cart_id" property="shoppingCartId" jdbcType="VARCHAR"/>
+		<result column="loginType" property="loginType" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		id, username, password, phone, created, updated,
+		status, is_mobile_check, sex, member_id, birthday,
+		last_login_time, shopping_cart_id, loginType
+	</sql>
+
+    <!-- 注册账号 -->
+    <insert id="registered" parameterType="cn.chzu.buildingmaterials.wxuser.model.WxUser">
+		insert into wxuser
+			(id, username, password, phone, created, updated,
+		status, is_mobile_check, sex, member_id, birthday,
+		last_login_time, shopping_cart_id, loginType)
+		values (
+		#{id,jdbcType=VARCHAR},
+		#{userName,jdbcType=VARCHAR},
+		#{passWord,jdbcType=VARCHAR},
+		#{phone,jdbcType=VARCHAR},
+		#{created,jdbcType=VARCHAR},
+		#{updated,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR},
+		#{isMobileCheck,jdbcType=VARCHAR},
+		#{sex,jdbcType=VARCHAR},
+		#{memberId,jdbcType=VARCHAR},
+		#{birthday,jdbcType=VARCHAR},
+		#{lastLoginTime,jdbcType=VARCHAR},
+		#{shoppingCartId,jdbcType=VARCHAR},
+		#{loginType,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<!-- 查询账号是否已存在 -->
+	<select id="findWxUserName" resultMap="BaseResultMap" parameterType="cn.chzu.buildingmaterials.wxuser.model.WxUser">
+		select
+		<include refid="Base_Column_List"/>
+		from wxuser
+		where username = #{userName,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 查询手机号号是否已存在 -->
+	<select id="findPhone" resultMap="BaseResultMap" parameterType="cn.chzu.buildingmaterials.wxuser.model.WxUser">
+		select
+		<include refid="Base_Column_List"/>
+		from wxuser
+		where phone = #{phone,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 账号登录 -->
+	<select id="login" resultMap="BaseResultMap" parameterType="cn.chzu.buildingmaterials.wxuser.model.WxUser">
+		select *
+		from wxuser
+		<where>
+			loginType = #{loginType,jdbcType=VARCHAR}
+			<if test="userName != null">
+				and username = #{userName,jdbcType=VARCHAR}
+			</if>
+			<if test="passWord != null">
+				and password = #{passWord,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<!--根据userName修改最后登录时间-->
+	<update id="updateLastLoginTime" parameterType="cn.chzu.buildingmaterials.wxuser.model.WxUser">
+		update wxuser
+		<set>
+			<if test="lastLoginTime != null">
+				last_login_time = #{lastLoginTime,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where username = #{userName,jdbcType=VARCHAR} and loginType = #{loginType,jdbcType=VARCHAR}
+	</update>
+
+	<!--忘记密码，验证后，设置新密码-->
+	<update id="forgetPassword" parameterType="cn.chzu.buildingmaterials.wxuser.model.WxUser">
+		update wxuser
+		<set>
+			<if test="passWord != null">
+				password = #{passWord,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where phone = #{phone,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 查询微信授权账号是否已存在 -->
+	<select id="findWeChatAuthorization" resultMap="BaseResultMap" parameterType="cn.chzu.buildingmaterials.wxuser.model.WxUser">
+		select
+		<include refid="Base_Column_List"/>
+		from wxuser
+		where username = #{userName,jdbcType=VARCHAR} and loginType = #{loginType,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 根据id查询用户信息 -->
+	<select id="findAccountId" resultMap="BaseResultMap" parameterType="cn.chzu.buildingmaterials.wxuser.model.WxUser">
+		select
+		<include refid="Base_Column_List"/>
+		from wxuser
+		where id= #{id,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 查询所有用户信息 -->
+	<select id="findAllWxUser" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List"/>
+		from wxuser
+	</select>
+</mapper>
+

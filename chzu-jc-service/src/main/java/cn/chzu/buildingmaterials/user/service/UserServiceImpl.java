@@ -94,5 +94,22 @@ public class UserServiceImpl implements UserService {
         return userMapper.findAllUser();
     }
 
+    //根据id修改信息
+    @Override
+    public User updateById(User user) {
+
+        String psw = user.getPassword();
+        //密码MD5加密后赋值
+        user.setPassword(KEMD5Utils.MD5(psw));
+        int i = userMapper.updateById(user);
+        if (i == 1) {
+            user.setMsg("修改成功！");
+        } else {
+            user.setMsg("修改失败！");
+        }
+
+        return user;
+    }
+
 
 }

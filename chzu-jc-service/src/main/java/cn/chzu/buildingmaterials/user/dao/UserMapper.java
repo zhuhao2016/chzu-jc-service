@@ -27,5 +27,7 @@ public interface UserMapper {
     //查询所有后台用户信息
     public List<User> findAllUser();
 
+    // 根据id修改
+    public int updateById(User user);
 
 }
