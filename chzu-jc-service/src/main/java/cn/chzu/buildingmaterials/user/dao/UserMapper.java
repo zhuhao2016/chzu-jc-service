@@ -30,4 +30,7 @@ public interface UserMapper {
     // 根据id修改
     public int updateById(User user);
 
+    //用户名模糊查询
+    public List<User> findByLinks(String links);
+
 }

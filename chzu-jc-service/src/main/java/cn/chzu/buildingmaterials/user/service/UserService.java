@@ -23,4 +23,7 @@ public interface UserService {
 
     //根据id修改
     public User updateById(User user);
+
+    // 模糊查询
+    public List<User> findByLinks(String links);
 }

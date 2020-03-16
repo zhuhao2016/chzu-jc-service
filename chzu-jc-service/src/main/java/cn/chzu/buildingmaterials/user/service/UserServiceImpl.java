@@ -111,5 +111,12 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    //模糊查询
+    @Override
+    public List<User> findByLinks(String links) {
+
+        return userMapper.findByLinks(links);
+    }
+
 
 }

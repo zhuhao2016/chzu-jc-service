@@ -83,5 +83,14 @@
 		</set>
 		where id = #{id,jdbcType=VARCHAR}
 	</update>
+
+	<!-- 模糊查询 -->
+	<select id="findByLinks" resultMap="BaseResultMap" parameterType="cn.chzu.buildingmaterials.user.model.User">
+		select
+		<include refid="Base_Column_List"/>
+		from user
+		where
+		username like '%${shopStore,jdbcType=VARCHAR}%'
+	</select>
 </mapper>
 

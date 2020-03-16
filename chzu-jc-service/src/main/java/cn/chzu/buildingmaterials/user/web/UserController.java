@@ -162,4 +162,22 @@ public class UserController {
         return new ResObject<>(null, user);
     }
 
+    /**
+     * @param request
+     * @param response
+     * @param data
+     * @return cn.chzu.conf.common.ResObject<java.util.List < cn.chzu.buildingmaterials.user.model.User>>
+     * @Title findByLinks
+     * @description 后台用户名模糊查询
+     * @author zhu_hao
+     * @date 2020/3/16 15:57
+     */
+    @RequestMapping(value = "/findByLinks", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObject<List<User>> findByLinks(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<User> data) {
+
+        String links = data.getObject().getLinks();
+        List<User> byLinks = userService.findByLinks(links);
+        return new ResObject<>(null, byLinks);
+    }
 }
