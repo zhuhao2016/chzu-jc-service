@@ -31,7 +31,7 @@ public class StoreClassController {
      * @param response
      * @return cn.chzu.conf.common.ResObject<java.util.List < cn.chzu.clothing.storeclass.model.StoreClass>>
      * @Title findAll
-     * @description 查询字典所有字段
+     * @description 查询商品分类字典所有字段
      * @author zhu_hao
      * @date 2020/2/24 16:37
      */

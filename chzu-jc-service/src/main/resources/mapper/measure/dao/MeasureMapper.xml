@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chzu.buildingmaterials.measure.dao.MeasureMapper">
+    <resultMap id="BaseResultMap" type="cn.chzu.buildingmaterials.measure.model.Measure">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		id, unit
+	</sql>
+
+    <!-- 新增分类 -->
+    <insert id="add" parameterType="cn.chzu.buildingmaterials.measure.model.Measure">
+		insert into measure
+			(id, unit)
+		values (
+		#{id,jdbcType=VARCHAR},
+		#{unit,jdbcType=VARCHAR}
+		)
+	</insert>
+
+
+
+    <!-- 查询所有分类-->
+    <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from measure
+        order by unit
+    </select>
+
+    <!-- 根据unit查询 -->
+    <select id="findByUnit" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from measure
+        where unit = #{unit,jdbcType=VARCHAR}
+    </select>
+
+    <!-- 删除-->
+    <delete id="delete" parameterType="java.lang.String">
+		delete from measure
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+
+</mapper>
+
