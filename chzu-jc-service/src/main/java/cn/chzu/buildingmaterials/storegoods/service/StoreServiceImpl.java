@@ -55,7 +55,7 @@ public class StoreServiceImpl implements StoreService {
                 return store;
             }
 
-            store.setStoreName("总店");
+            store.setStoreName("太平建材市场");
             //设置图片访问地址
             store.setImage(pathURL + saveFile);
             storeMapper.add(store);
