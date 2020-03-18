@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chzu.buildingmaterials.shoppingcart.dao.ShoppingCartMapper">
+    <resultMap id="BaseResultMap" type="cn.chzu.buildingmaterials.shoppingcart.model.ShoppingCart">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <id column="shopping_cart_id" property="shoppingCartId" jdbcType="VARCHAR"/>
+        <result column="img" property="img" jdbcType="VARCHAR"/>
+        <result column="goods_name" property="goodsName" jdbcType="VARCHAR"/>
+        <result column="sales_price" property="salesPrice" jdbcType="VARCHAR"/>
+        <result column="counts" property="counts" jdbcType="VARCHAR"/>
+        <result column="goodsId" property="goodsId" jdbcType="VARCHAR"/>
+        <result column="store_name" property="storeName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		id, shopping_cart_id, img, goods_name, sales_price, counts, goodsId, store_name
+	</sql>
+
+    <!-- 首次添加商品到购物车 -->
+    <insert id="addToCart" parameterType="cn.chzu.buildingmaterials.shoppingcart.model.ShoppingCart">
+		insert into shoppingcart
+			(id,shopping_cart_id, img, goods_name, sales_price, counts, goodsId, store_name)
+		values (
+		#{id,jdbcType=VARCHAR},
+		#{shoppingCartId,jdbcType=VARCHAR},
+		#{img,jdbcType=VARCHAR},
+		#{goodsName,jdbcType=VARCHAR},
+		#{salesPrice,jdbcType=VARCHAR},
+		#{counts,jdbcType=VARCHAR},
+		#{goodsId,jdbcType=VARCHAR},
+		#{storeName,jdbcType=VARCHAR}
+		)
+	</insert>
+
+    <!-- 该商品已存在购物车中，添加修改购物车中商品数量，每次数量加一 -->
+    <update id="updateAddCount" parameterType="cn.chzu.buildingmaterials.shoppingcart.model.ShoppingCart">
+        update shoppingcart
+        <set>
+            <if test="counts != null">
+                counts = #{counts,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where goodsId = #{goodsId,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 查询数据库，看该商品是否已存在购物车 -->
+    <select id="findByGoodsName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from shoppingcart
+        where shopping_cart_id = #{shoppingCartId,jdbcType=VARCHAR} and goodsId = #{goodsId,jdbcType=VARCHAR}
+    </select>
+
+    <!--根据id批量删除-->
+    <delete id="batchDelete">
+        delete from shoppingcart where id in
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <foreach collection="list" item="item" separator=",">
+                #{item.id}
+            </foreach>
+        </trim>
+    </delete>
+
+    <!--结算生成订单时，删除单个购物车商品-->
+    <delete id="delete">
+        delete from shoppingcart
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <!-- 查询购物车列表,并排序 -->
+    <select id="findAllByShoppingCartId" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+        <include refid="Base_Column_List"/>
+		from shoppingcart
+		where shopping_cart_id = #{shoppingCartId,jdbcType=VARCHAR}
+		order by id desc
+	</select>
+</mapper>
+
