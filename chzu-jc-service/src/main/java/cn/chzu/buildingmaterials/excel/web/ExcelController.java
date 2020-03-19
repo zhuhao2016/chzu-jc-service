@@ -30,7 +30,7 @@ public class ExcelController {
     @Autowired
     ExcelService excelService;
 
-    @RequestMapping(value = "/exportExcel", method = RequestMethod.POST)
+    @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
     @ResponseBody
     public void exportExcel(HttpServletResponse response, HttpServletRequest request) throws Exception {
 
