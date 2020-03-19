@@ -172,7 +172,6 @@ public class ManageServiceImpl implements ManageService {
             }
             //设置查询的时间
             storeAnalysis.setTime(str3.getTime());
-            System.out.println(storeAnalysis.getTime());
             //设置店铺名
             storeAnalysis.setStoreName("太平建材市场");
             storeAnalysis.setOrderNumber(orderNumber);

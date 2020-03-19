@@ -35,7 +35,7 @@ public class ExcelController {
     public void exportExcel(HttpServletResponse response, HttpServletRequest request) throws Exception {
 
         //接收参数
-        String accounttime = request.getParameter("accounttime");
+        //String accounttime = request.getParameter("accounttime");
         //查询数据，实际可通过传过来的参数当条件去数据库查询，在此我就用空集合（数据）来替代
         //List<StoreAnalysis> list = new ArrayList<StoreAnalysis>();
 
@@ -44,7 +44,7 @@ public class ExcelController {
         SXSSFWorkbook sxssfWorkbook = new SXSSFWorkbook();
 
         //创建sheet页
-        SXSSFSheet sheet = sxssfWorkbook.createSheet("sheet页名字");
+        SXSSFSheet sheet = sxssfWorkbook.createSheet("每天销售情况");
         //创建表头
         SXSSFRow headRow = sheet.createRow(0);
         //设置表头信息
@@ -75,7 +75,7 @@ public class ExcelController {
         }
 
         // 下载导出
-        String filename = "每天下单数据分析表";
+        String filename = "orderReport";
         // 设置头信息
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/vnd.ms-excel");

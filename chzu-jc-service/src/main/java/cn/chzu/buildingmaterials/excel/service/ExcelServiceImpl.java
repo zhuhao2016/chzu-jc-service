@@ -2,20 +2,20 @@ package cn.chzu.buildingmaterials.excel.service;
 
 import cn.chzu.buildingmaterials.manage.model.StoreAnalysis;
 import cn.chzu.buildingmaterials.order.dao.OrderMapper;
+import cn.chzu.buildingmaterials.order.model.OrderDTO;
 import cn.chzu.buildingmaterials.storegoods.dao.StoreMapper;
+import cn.chzu.buildingmaterials.storegoods.model.Store;
 import cn.chzu.buildingmaterials.user.dao.UserMapper;
 import cn.chzu.buildingmaterials.wxuser.dao.WxUserMapper;
 import cn.chzu.conf.util.time.CurrentTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @description:
@@ -44,14 +44,14 @@ public class ExcelServiceImpl implements ExcelService {
     public List<StoreAnalysis> exportExcel() throws ParseException {
 
         List<StoreAnalysis> list = new ArrayList<>();
-        StoreAnalysis storeAnalysis = new StoreAnalysis();
+       // StoreAnalysis storeAnalysis = new StoreAnalysis();
         //创建一个TreeSet集合来保存订单的日期
         //TreeSet<StoreAnalysis> set = new TreeSet<>();
-        String endDate = "2020-03-19";
+        String endDate = "2020-03-18";
         List<StoreAnalysis> listTime = new ArrayList<>();
         for (; ; ) {
             StoreAnalysis sto = new StoreAnalysis();
-            //要实现日期+1 需要String转成Date类型
+           /* //要实现日期+1 需要String转成Date类型
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date sDate = sdf.parse(endDate);
             Format f = new SimpleDateFormat("yyyy-MM-dd");
@@ -63,7 +63,27 @@ public class ExcelServiceImpl implements ExcelService {
             //将日期转成String类型 方便进入数据库比较
             SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
             endDate = sdf1.format(sDate);
-            System.out.println("Date类型转String类型  " + endDate);
+            System.out.println("Date类型转String类型  " + endDate);*/
+
+            //页面传递到后台的时间 为String类型
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date sDate = sdf.parse(endDate);
+
+            //要实现日期+1 需要String转成Date类型
+
+            Format f = new SimpleDateFormat("yyyy-MM-dd");
+
+            Calendar c = Calendar.getInstance();
+            c.setTime(sDate);
+            //利用Calendar 实现 Date日期+1天
+            c.add(Calendar.DAY_OF_MONTH, 1);
+
+            sDate = c.getTime();
+            //打印Date日期,显示成功+1天
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            endDate = sdf1.format(sDate);
+           //将日期转成String类型 方便进入数据库比较
             sto.setTime(endDate);
             listTime.add(sto);
             //获取当前时间
@@ -73,31 +93,31 @@ public class ExcelServiceImpl implements ExcelService {
             if (substring.equals(endDate)){
                 break;
             }
-
         }
 
-        /*//查询所有订单
+        //查询所有订单
         List<OrderDTO> allBackstage = orderMapper.findAllBackstage();
-        for (OrderDTO str : allBackstage) {
+       /* for (OrderDTO str : allBackstage) {
             String times = str.getCreateTime();
             //截取字符串,只保留年月日
             String substring = times.substring(0, 10);
             storeAnalysis.setTime(substring);
             set.add(storeAnalysis);
-        }
+        }*/
 
         //遍历时间集合
-        for (StoreAnalysis str3 : set) {
+        for (StoreAnalysis str3 : listTime) {
 
+            StoreAnalysis storeAnalysis1 = new StoreAnalysis();
             //创建一个HashSet集合，来统计客户人数
             HashSet<String> hashSet = new HashSet<>();
 
             //设置查询的时间
-            storeAnalysis.setTime(str3.getTime());
+            storeAnalysis1.setTime(str3.getTime());
             //
             String time = str3.getTime();
             //设置店铺名
-            storeAnalysis.setStoreName("太平建材市场");
+            storeAnalysis1.setStoreName("太平建材市场");
             int orderNumber = 0;
             double salesAmount = 0;
             double drossProfit = 0;
@@ -137,12 +157,12 @@ public class ExcelServiceImpl implements ExcelService {
             } else {
                 customerPrice = 0;
             }
-            storeAnalysis.setOrderNumber(orderNumber);
-            storeAnalysis.setSalesAmount(salesAmount);
-            storeAnalysis.setDrossProfit(drossProfit);
-            storeAnalysis.setCustomerPrice(customerPrice);
-            list.add(storeAnalysis);
-        }*/
+            storeAnalysis1.setOrderNumber(orderNumber);
+            storeAnalysis1.setSalesAmount(salesAmount);
+            storeAnalysis1.setDrossProfit(drossProfit);
+            storeAnalysis1.setCustomerPrice(customerPrice);
+            list.add(storeAnalysis1);
+        }
         return list;
     }
 
