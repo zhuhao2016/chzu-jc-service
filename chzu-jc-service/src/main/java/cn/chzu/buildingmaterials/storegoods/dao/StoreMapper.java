@@ -42,4 +42,7 @@ public interface StoreMapper {
     //查询商品库存
     public Store findSalesNumber(Store store);
 
+    //根据id查询
+    public Store findById(String id);
+
 }

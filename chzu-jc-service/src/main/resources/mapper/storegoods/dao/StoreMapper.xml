@@ -121,5 +121,13 @@
 		where kind = #{kind,jdbcType=VARCHAR}
 		order by id desc
 	</select>
+
+	<!-- 根据id查询 -->
+	<select id="findById" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List"/>
+		from storegoodslist
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
 </mapper>
 
