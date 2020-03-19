@@ -118,20 +118,19 @@ public class ManageServiceImpl implements ManageService {
     @Override
     public List<StoreAnalysis> salesAnalysis(List<StoreAnalysis> analysis) {
 
-        StoreAnalysis storeAnalysis = new StoreAnalysis();
+
 
         List<StoreAnalysis> list = new ArrayList<>();
         //遍历时间集合
         for (StoreAnalysis str3 : analysis) {
+
+            StoreAnalysis storeAnalysis = new StoreAnalysis();
             //创建一个HashSet集合，来统计客户人数
             HashSet<String> hashSet = new HashSet<>();
             //查询所有订单
             List<OrderDTO> allByStoreName = orderMapper.findAllBackstage();
             String time = str3.getTime();
-            //设置查询的时间
-            storeAnalysis.setTime(time);
-            //设置店铺名
-            storeAnalysis.setStoreName("太平建材市场");
+
             int orderNumber = 0;
             double salesAmount = 0;
             double drossProfit = 0;
@@ -171,6 +170,11 @@ public class ManageServiceImpl implements ManageService {
             } else {
                 customerPrice = 0;
             }
+            //设置查询的时间
+            storeAnalysis.setTime(str3.getTime());
+            System.out.println(storeAnalysis.getTime());
+            //设置店铺名
+            storeAnalysis.setStoreName("太平建材市场");
             storeAnalysis.setOrderNumber(orderNumber);
             storeAnalysis.setSalesAmount(salesAmount);
             storeAnalysis.setDrossProfit(drossProfit);
