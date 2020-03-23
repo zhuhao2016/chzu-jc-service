@@ -34,7 +34,7 @@ public interface StoreMapper {
     public int updateById(Store store);
 
     //更新库存(只更新库存)
-    public int updateSalesNumber(Store store);
+    public void updateSalesNumber(Store store);
 
     //根据分类类型查询该类型所有信息
     public List<Store> findAllKind(String kind);
