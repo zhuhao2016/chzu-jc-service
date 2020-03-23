@@ -3,6 +3,7 @@ package cn.chzu.buildingmaterials.shoppingcart.web;
 
 import cn.chzu.buildingmaterials.shoppingcart.model.ShoppingCart;
 import cn.chzu.buildingmaterials.shoppingcart.service.ShoppingCartService;
+import cn.chzu.buildingmaterials.storegoods.model.StoreVo;
 import cn.chzu.conf.common.ReqObject;
 import cn.chzu.conf.common.ResObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,5 +84,22 @@ public class ShoppingCartController {
         String shoppingCartId = data.getObject().getShoppingCartId();
         List<ShoppingCart> all = shoppingCartService.findAllByShoppingCartId(shoppingCartId);
         return new ResObject<>(null, all);
+    }
+
+    /**
+     * @param request
+     * @param response
+     * @return cn.chzu.conf.common.ResObject<java.util.List < cn.chzu.buildingmaterials.storegoods.model.StoreVo>>
+     * @Title recommend
+     * @description 微信小程序首页推荐
+     * @author zhu_hao
+     * @date 2020/3/23 14:32
+     */
+    @RequestMapping(value = "/recommend", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObject<List<StoreVo>> recommend(HttpServletRequest request, HttpServletResponse response) {
+
+        List<StoreVo> recommend = shoppingCartService.recommend();
+        return new ResObject<>(null, recommend);
     }
 }

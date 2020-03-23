@@ -2,6 +2,7 @@ package cn.chzu.buildingmaterials.shoppingcart.service;
 
 
 import cn.chzu.buildingmaterials.shoppingcart.model.ShoppingCart;
+import cn.chzu.buildingmaterials.storegoods.model.StoreVo;
 
 import java.util.List;
 
@@ -22,4 +23,7 @@ public interface ShoppingCartService {
 
     //查询购物车
     public List<ShoppingCart> findAllByShoppingCartId(String shoppingCartId);
+
+    //首页推荐
+    public List<StoreVo> recommend();
 }
