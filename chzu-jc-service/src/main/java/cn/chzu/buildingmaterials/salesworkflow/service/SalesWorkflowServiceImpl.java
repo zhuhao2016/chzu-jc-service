@@ -105,6 +105,6 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
         checkVO.setSalesSum(String.valueOf(sum));
         checkVO.setCheck(list);
         checkVO.setMsg("结算成功，请打印销售凭据！");
-        return null;
+        return checkVO;
     }
 }
