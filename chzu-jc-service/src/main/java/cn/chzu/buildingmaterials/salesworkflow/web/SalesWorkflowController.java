@@ -1,6 +1,7 @@
 package cn.chzu.buildingmaterials.salesworkflow.web;
 
 import cn.chzu.buildingmaterials.salesworkflow.model.Check;
+import cn.chzu.buildingmaterials.salesworkflow.model.CheckVO;
 import cn.chzu.buildingmaterials.salesworkflow.service.SalesWorkflowService;
 import cn.chzu.buildingmaterials.storegoods.model.StoreVo;
 import cn.chzu.conf.common.ReqObject;
@@ -57,10 +58,10 @@ public class SalesWorkflowController {
      */
     @RequestMapping(value = "/checkEmployee", method = RequestMethod.POST)
     @ResponseBody
-    public ResObject<Check> checkEmployee(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<List<Check>> data) {
+    public ResObject<CheckVO> checkEmployee(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<List<Check>> data) {
 
         List<Check> list = data.getObject();
-        Check check = salesWorkflowService.checkEmployee(list);
-        return new ResObject<>(null, check);
+        CheckVO checkVO = salesWorkflowService.checkEmployee(list);
+        return new ResObject<>(null, checkVO);
     }
 }
