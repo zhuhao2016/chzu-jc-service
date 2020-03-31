@@ -142,4 +142,12 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
         checkVO.setMsg("退款将在1-2小时内原路返还");
         return checkVO;
     }
+
+    //根据商品id退货
+    @Override
+    public Check returns(String id, String count) {
+
+
+        return null;
+    }
 }

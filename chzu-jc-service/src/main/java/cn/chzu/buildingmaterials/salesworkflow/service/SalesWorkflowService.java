@@ -23,4 +23,8 @@ public interface SalesWorkflowService {
 
     //消单-->取消订单、增加库存、退还金额
     public CheckVO cancellation(CheckVO checkVO);
+
+    //根据商品id退货
+    public Check returns(String id, String count);
+
 }
