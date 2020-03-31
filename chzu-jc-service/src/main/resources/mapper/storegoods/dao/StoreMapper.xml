@@ -12,18 +12,19 @@
         <result column="kind" property="kind" jdbcType="VARCHAR"/>
 		<result column="measure" property="measure" jdbcType="VARCHAR"/>
 		<result column="image" property="image" jdbcType="VARCHAR"/>
+		<result column="priority" property="priority" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
 		id, store_name, goods_name, sales_number, price,
-		sales_price, remarks, kind, measure, image
+		sales_price, remarks, kind, measure, image, priority
 	</sql>
 
     <!-- 新增商品 -->
     <insert id="add" parameterType="cn.chzu.buildingmaterials.storegoods.model.Store">
 		insert into storegoodslist
 			(id, store_name, goods_name, sales_number, price,
-		sales_price, remarks, kind, measure, image)
+		sales_price, remarks, kind, measure, image, priority)
 		values (
 		#{id,jdbcType=VARCHAR},
 		#{storeName,jdbcType=VARCHAR},
@@ -34,7 +35,8 @@
 		#{remarks,jdbcType=VARCHAR},
 		#{kind,jdbcType=VARCHAR},
 		#{measure,jdbcType=VARCHAR},
-		#{image,jdbcType=VARCHAR}
+		#{image,jdbcType=VARCHAR},
+		#{priority,jdbcType=VARCHAR}
 		)
 	</insert>
 
@@ -51,7 +53,7 @@
 		select *
 		from storegoodslist
 		where store_name = #{storeName,jdbcType=VARCHAR}
-		order by id desc
+		order by priority desc
 	</select>
 
     <!-- 商品名模糊查询 -->

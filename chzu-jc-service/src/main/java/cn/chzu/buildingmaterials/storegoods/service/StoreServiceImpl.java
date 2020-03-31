@@ -58,6 +58,8 @@ public class StoreServiceImpl implements StoreService {
             store.setStoreName("太平建材市场");
             //设置图片访问地址
             store.setImage(pathURL + saveFile);
+            //设置默认优先级
+            store.setPriority("100");
             storeMapper.add(store);
             store.setMsg("成功新增商品！");
         }

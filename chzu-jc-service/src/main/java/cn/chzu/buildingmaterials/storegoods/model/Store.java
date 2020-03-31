@@ -33,6 +33,8 @@ public class Store extends Prompt {
     private String cont;
     //商品图片
     private String image;
+    //商品推荐优先级
+    private String priority;
 
     public String getId() {
         return id;
@@ -122,6 +124,14 @@ public class Store extends Prompt {
         this.image = image;
     }
 
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
     @Override
     public String toString() {
         return "Store{" +
@@ -136,6 +146,7 @@ public class Store extends Prompt {
                 ", measure='" + measure + '\'' +
                 ", cont='" + cont + '\'' +
                 ", image='" + image + '\'' +
+                ", priority='" + priority + '\'' +
                 '}';
     }
 }

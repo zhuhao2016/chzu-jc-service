@@ -45,4 +45,6 @@ public interface StoreMapper {
     //根据id查询
     public Store findById(String id);
 
+    //首页优先级推广管理
+    public int updatePriority(String id , String priority);
 }
