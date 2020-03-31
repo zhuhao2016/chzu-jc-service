@@ -62,7 +62,8 @@
     </select>
 
     <!-- 查询待发货、已发货接口 -->
-    <select id="findToBeDelivered" resultMap="BaseResultMap" parameterType="cn.chzu.buildingmaterials.order.model.OrderDTO">
+    <select id="findToBeDelivered" resultMap="BaseResultMap"
+            parameterType="cn.chzu.buildingmaterials.order.model.OrderDTO">
         select
         <include refid="Base_Column_List"/>
         from orders
@@ -111,7 +112,8 @@
         <include refid="Base_Column_List"/>
         from orders
         where
-        userName like '%${userName,jdbcType=VARCHAR}%' or storeName like '%${storeName,jdbcType=VARCHAR}%' or status like '%${status,jdbcType=VARCHAR}%'
+        userName like '%${userName,jdbcType=VARCHAR}%' or storeName like '%${storeName,jdbcType=VARCHAR}%' or status
+        like '%${status,jdbcType=VARCHAR}%'
     </select>
 
     <!-- 根据店铺名查询所有订单 -->
@@ -121,5 +123,11 @@
         from orders
         where storeName = #{storeName,jdbcType=VARCHAR}
     </select>
+
+    <!-- 删除-->
+    <delete id="deleteByCheckId" parameterType="java.lang.String">
+		delete from orders
+		where accountId = #{accountId,jdbcType=VARCHAR}
+	</delete>
 </mapper>
 

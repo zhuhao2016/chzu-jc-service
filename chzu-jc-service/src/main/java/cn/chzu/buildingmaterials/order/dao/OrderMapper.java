@@ -35,4 +35,8 @@ public interface OrderMapper {
 
     //根据店铺名查询所有订单
     public List<OrderDTO> findAllByStoreName(String storeName);
+
+    //根据结算单号删除订单
+    public int deleteByCheckId(String accountId);
+
 }

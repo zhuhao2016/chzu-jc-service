@@ -30,13 +30,13 @@ public class SalesWorkflowController {
     SalesWorkflowService salesWorkflowService;
 
     /**
+     * @param request
+     * @param response
+     * @return cn.chzu.conf.common.ResObject<java.util.List < cn.chzu.buildingmaterials.storegoods.model.StoreVo>>
      * @Title findAllStore
      * @description 员工查询所有商品接口，便于下单
      * @author zhu_hao
      * @date 2020/3/23 14:57
-     * @param request
-     * @param response
-     * @return cn.chzu.conf.common.ResObject<java.util.List<cn.chzu.buildingmaterials.storegoods.model.StoreVo>>
      */
     @RequestMapping(value = "/findAllStore", method = RequestMethod.POST)
     @ResponseBody
@@ -47,14 +47,14 @@ public class SalesWorkflowController {
     }
 
     /**
-     * @Title checkEmployee
-     * @description 线下员工结单操作,已确认支付//操作流程，点击结算，放出二维码，支付成功点击确认 调用接口
-     * @author zhu_hao
-     * @date 2020/3/23 15:27
      * @param request
      * @param response
      * @param data
      * @return cn.chzu.conf.common.ResObject<cn.chzu.buildingmaterials.salesworkflow.model.Check>
+     * @Title checkEmployee
+     * @description 线下员工结单操作, 已确认支付//操作流程，点击结算，放出二维码，支付成功点击确认 调用接口
+     * @author zhu_hao
+     * @date 2020/3/23 15:27
      */
     @RequestMapping(value = "/checkEmployee", method = RequestMethod.POST)
     @ResponseBody
@@ -63,5 +63,24 @@ public class SalesWorkflowController {
         List<Check> list = data.getObject();
         CheckVO checkVO = salesWorkflowService.checkEmployee(list);
         return new ResObject<>(null, checkVO);
+    }
+
+    /**
+     * @param request
+     * @param response
+     * @param data
+     * @return cn.chzu.conf.common.ResObject<cn.chzu.buildingmaterials.salesworkflow.model.CheckVO>
+     * @Title cancellation
+     * @description 消单-->取消订单、增加库存、退还金额
+     * @author zhu_hao
+     * @date 2020/3/31 13:46
+     */
+    @RequestMapping(value = "/cancellation", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObject<CheckVO> cancellation(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<CheckVO> data) {
+
+        CheckVO object = data.getObject();
+        CheckVO cancellation = salesWorkflowService.cancellation(object);
+        return new ResObject<>(null, cancellation);
     }
 }

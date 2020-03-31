@@ -107,4 +107,39 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
         checkVO.setMsg("结算成功，请打印销售凭据！");
         return checkVO;
     }
+
+    //消单-->取消订单、增加库存、退还金额
+    @Override
+    public CheckVO cancellation(CheckVO checkVO) {
+
+        String checkId = checkVO.getCheckId();
+        //将对应商品库存增加
+        List<OrderDTO> list = orderMapper.findAll(checkId);
+        for (OrderDTO str : list) {
+            //获取商品的id
+            String goodsId = str.getGoodsId();
+            //获取购买的商品数量
+            String counts = str.getCounts();
+            //类型转换
+            Integer i = Integer.valueOf(counts);
+            Store store = new Store();
+            store.setId(goodsId);
+            Store salesNumber = storeMapper.findSalesNumber(store);
+            String number = salesNumber.getSalesNumber();
+            Integer s = Integer.valueOf(number);
+            Integer num = i + s;
+            //转换成string类型
+            String s1 = String.valueOf(num);
+            //根据商品id修改库存
+            Store store1 = new Store();
+            store1.setSalesNumber(s1);
+            store1.setId(goodsId);
+            storeMapper.updateSalesNumber(store1);
+        }
+        //根据结算单号删除订单
+        orderMapper.deleteByCheckId(checkId);
+        //退还金额（模拟）
+        checkVO.setMsg("退款将在1-2小时内原路返还");
+        return checkVO;
+    }
 }
