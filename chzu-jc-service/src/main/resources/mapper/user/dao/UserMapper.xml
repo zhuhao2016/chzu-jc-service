@@ -77,8 +77,8 @@
 			<if test="phoneNumber != null">
 				phone_number = #{phoneNumber,jdbcType=VARCHAR},
 			</if>
-			<if test="sex != null">
-				sex = #{sex,jdbcType=VARCHAR},
+			<if test="roleId != null">
+				role_id = #{roleId,jdbcType=VARCHAR},
 			</if>
 		</set>
 		where id = #{id,jdbcType=VARCHAR}
