@@ -119,5 +119,18 @@ public class UserServiceImpl implements UserService {
         return userMapper.findByLinks(links);
     }
 
+    //删除
+    @Override
+    public int delete(String id) {
+
+        int delete = userMapper.delete(id);
+        if (delete==1){
+            return 0;
+        }else {
+            return 1;
+        }
+
+    }
+
 
 }

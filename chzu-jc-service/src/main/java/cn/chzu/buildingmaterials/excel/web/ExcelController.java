@@ -35,11 +35,7 @@ public class ExcelController {
     @ResponseBody
     public void exportExcel(HttpServletResponse response, HttpServletRequest request) throws Exception {
 
-        //接收参数
-        //String accounttime = request.getParameter("accounttime");
         //查询数据，实际可通过传过来的参数当条件去数据库查询，在此我就用空集合（数据）来替代
-        //List<StoreAnalysis> list = new ArrayList<StoreAnalysis>();
-
         List<StoreAnalysis> list = excelService.exportExcel();
         //创建poi导出数据对象
         SXSSFWorkbook sxssfWorkbook = new SXSSFWorkbook();
@@ -56,10 +52,11 @@ public class ExcelController {
         headRow.createCell(4).setCellValue("销售金额");
         headRow.createCell(5).setCellValue("销售毛利润");
         headRow.createCell(6).setCellValue("客单价");
+        //序号
+        int x = 1;
         // 遍历上面数据库查到的数据
         for (StoreAnalysis storeAnalysis : list) {
-            //序号
-            int x = 1;
+
             //填充数据
             SXSSFRow dataRow = sheet.createRow(sheet.getLastRowNum() + 1);
             //序号
@@ -71,7 +68,6 @@ public class ExcelController {
             dataRow.createCell(4).setCellValue(storeAnalysis.getSalesAmount());
             dataRow.createCell(5).setCellValue(storeAnalysis.getDrossProfit());
             dataRow.createCell(6).setCellValue(storeAnalysis.getCustomerPrice());
-
             x++;
         }
 

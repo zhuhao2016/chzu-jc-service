@@ -180,4 +180,13 @@ public class UserController {
         List<User> byLinks = userService.findByLinks(links);
         return new ResObject<>(null, byLinks);
     }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObject<Integer> delete(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<User> data) {
+
+        String id = data.getObject().getId();
+        int i = userService.delete(id);
+        return new ResObject<>(null, i);
+    }
 }

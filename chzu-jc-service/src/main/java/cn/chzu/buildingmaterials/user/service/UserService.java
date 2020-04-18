@@ -26,4 +26,7 @@ public interface UserService {
 
     // 模糊查询
     public List<User> findByLinks(String links);
+
+    // 删除
+    public int delete(String id);
 }

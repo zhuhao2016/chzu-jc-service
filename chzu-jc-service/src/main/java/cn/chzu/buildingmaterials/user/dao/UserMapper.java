@@ -33,4 +33,6 @@ public interface UserMapper {
     //用户名模糊查询
     public List<User> findByLinks(String links);
 
+    // 删除用户
+    public int delete(String id);
 }
