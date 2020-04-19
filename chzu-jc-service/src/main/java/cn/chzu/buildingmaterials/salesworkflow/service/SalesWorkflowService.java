@@ -27,4 +27,7 @@ public interface SalesWorkflowService {
     //根据商品id退货
     public Check returns(String id, String count);
 
+    //商品加入购物车
+    public Check addCar(Check check);
+
 }

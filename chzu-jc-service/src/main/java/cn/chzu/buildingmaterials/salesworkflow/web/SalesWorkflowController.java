@@ -83,4 +83,23 @@ public class SalesWorkflowController {
         CheckVO cancellation = salesWorkflowService.cancellation(object);
         return new ResObject<>(null, cancellation);
     }
+
+    /**
+     * @param request
+     * @param response
+     * @param data
+     * @return cn.chzu.conf.common.ResObject<cn.chzu.buildingmaterials.salesworkflow.model.Check>
+     * @Title addCar
+     * @description 商品加入购物车
+     * @author zhu_hao
+     * @date 2020/4/19 13:31
+     */
+    @RequestMapping(value = "/addCar", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObject<Check> addCar(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<Check> data) {
+
+        Check object = data.getObject();
+        Check check = salesWorkflowService.addCar(object);
+        return new ResObject<>(null, check);
+    }
 }

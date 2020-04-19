@@ -11,7 +11,7 @@ import cn.chzu.base.model.Prompt;
  */
 public class Check extends Prompt {
 
-    //商品id
+    //id
     private String id;
     //销售商品名
     private String goodsName;
@@ -23,9 +23,14 @@ public class Check extends Prompt {
     private String measure;
     //单个销售商品总价
     private String salesPriceSum;
-    //结算单号
+    //员工账号id
     private String accountId;
-
+    //图片url
+    private String img;
+    //商品id
+    private String goodsId;
+    //订单号
+    private String orderNumber;
 
     public String getId() {
         return id;
@@ -81,6 +86,30 @@ public class Check extends Prompt {
 
     public void setAccountId(String accountId) {
         this.accountId = accountId;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
+    }
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     @Override

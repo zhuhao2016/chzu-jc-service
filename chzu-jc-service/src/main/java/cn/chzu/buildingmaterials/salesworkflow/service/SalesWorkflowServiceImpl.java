@@ -4,6 +4,8 @@ import cn.chzu.buildingmaterials.order.dao.OrderMapper;
 import cn.chzu.buildingmaterials.order.model.OrderDTO;
 import cn.chzu.buildingmaterials.salesworkflow.model.Check;
 import cn.chzu.buildingmaterials.salesworkflow.model.CheckVO;
+import cn.chzu.buildingmaterials.shoppingcart.dao.ShoppingCartMapper;
+import cn.chzu.buildingmaterials.shoppingcart.model.ShoppingCart;
 import cn.chzu.buildingmaterials.storegoods.dao.StoreMapper;
 import cn.chzu.buildingmaterials.storegoods.model.Store;
 import cn.chzu.buildingmaterials.storegoods.model.StoreVo;
@@ -30,6 +32,10 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
 
     @Autowired
     OrderMapper orderMapper;
+
+    @Autowired
+    ShoppingCartMapper shoppingCartMapper;
+
 
     //员工查询所有商品接口，便于下单
     @Override
@@ -149,5 +155,59 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
 
 
         return null;
+    }
+
+    //商品加入购物车
+    @Override
+    public Check addCar(Check check) {
+
+        //获取商品id，判断库存
+        String goodsId = check.getGoodsId();
+        Store store = storeMapper.findById(goodsId);
+        if (store == null) {
+            check.setMsg("该商品已下架");
+            return check;
+        } else {
+            String salesNumber = store.getSalesNumber();
+            if (salesNumber.equals("0")) {
+                check.setMsg("库存不足");
+                return check;
+            }
+        }
+        //查询数据库，看该商品是否已存在购物车
+        ShoppingCart byGoodsName = shoppingCartMapper.findByGoodsName(check.getAccountId(), goodsId);
+        ShoppingCart shoppingCart = new ShoppingCart();
+        if (byGoodsName == null) {
+            shoppingCart.setId(UUID.getUUID());
+            shoppingCart.setShoppingCartId(check.getAccountId());
+            shoppingCart.setImg(check.getImg());
+            shoppingCart.setGoodsName(check.getGoodsName());
+            shoppingCart.setGoodsId(check.getGoodsId());
+            shoppingCart.setSalesPrice(check.getSalesPrice());
+            shoppingCart.setCounts(check.getCount());
+            shoppingCart.setStoreName("太平建材市场");
+            int i = shoppingCartMapper.addToCart(shoppingCart);
+            if (i == 1) {
+                check.setMsg("添加成功!");
+            } else {
+                check.setMsg("添加失败!");
+            }
+        }else {
+            //该商品已存在购物车中，修改购物车中商品数量
+            Integer count = Integer.valueOf(byGoodsName.getCounts());
+            //每次点击count数量加一
+            Integer num = count + 1;
+            ShoppingCart cart = new ShoppingCart();
+            cart.setCounts(String.valueOf(num));
+            cart.setGoodsId(check.getGoodsId());
+            int i = shoppingCartMapper.updateAddCount(cart);
+            if (i == 1) {
+                check.setMsg("添加成功！");
+            } else {
+                check.setMsg("添加失败！");
+            }
+        }
+
+        return check;
     }
 }
