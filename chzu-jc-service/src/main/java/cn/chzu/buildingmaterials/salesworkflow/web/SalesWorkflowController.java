@@ -1,5 +1,6 @@
 package cn.chzu.buildingmaterials.salesworkflow.web;
 
+import cn.chzu.buildingmaterials.order.model.OrderDTO;
 import cn.chzu.buildingmaterials.salesworkflow.model.Check;
 import cn.chzu.buildingmaterials.salesworkflow.model.CheckVO;
 import cn.chzu.buildingmaterials.salesworkflow.service.SalesWorkflowService;
@@ -140,5 +141,43 @@ public class SalesWorkflowController {
         List<ShoppingCart> object = data.getObject();
         ShoppingCart shoppingCart = salesWorkflowService.batchDeletionById(object);
         return new ResObject<>(null, shoppingCart);
+    }
+
+    /**
+     * @param request
+     * @param response
+     * @param data
+     * @return cn.chzu.conf.common.ResObject<java.util.List < cn.chzu.buildingmaterials.order.model.OrderDTO>>
+     * @Title findByOrderNumber
+     * @description 退单，根据订单号查询
+     * @author zhu_hao
+     * @date 2020/4/19 14:58
+     */
+    @RequestMapping(value = "/findByOrderNumber", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObject<List<OrderDTO>> findByOrderNumber(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<Check> data) {
+
+        String orderNumber = data.getObject().getOrderNumber();
+        List<OrderDTO> byOrderNumber = salesWorkflowService.findByOrderNumber(orderNumber);
+        return new ResObject<>(null, byOrderNumber);
+    }
+
+    /**
+     * @param request
+     * @param response
+     * @param data
+     * @return cn.chzu.conf.common.ResObject<cn.chzu.buildingmaterials.salesworkflow.model.Check>
+     * @Title chargebackByOrderNumber
+     * @description 退单，根据订单号
+     * @author zhu_hao
+     * @date 2020/4/19 15:00
+     */
+    @RequestMapping(value = "/chargebackByOrderNumber", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObject<Check> chargebackByOrderNumber(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<Check> data) {
+
+        String orderNumber = data.getObject().getOrderNumber();
+        Check check = salesWorkflowService.chargebackByOrderNumber(orderNumber);
+        return new ResObject<>(null, check);
     }
 }

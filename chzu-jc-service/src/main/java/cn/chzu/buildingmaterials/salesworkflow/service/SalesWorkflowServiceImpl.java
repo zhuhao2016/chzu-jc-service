@@ -225,4 +225,45 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
         }
         return shoppingCart;
     }
+
+    //退单，根据订单号
+    @Override
+    public Check chargebackByOrderNumber(String orderNumber) {
+
+        Check check = new Check();
+        //查询该订单号的所有订单
+        List<OrderDTO> list = orderMapper.findAll(orderNumber);
+        if (list.isEmpty()){
+            check.setMsg("订单号错误，请重新输入！");
+            return check;
+        }
+        //遍历
+        for (OrderDTO str : list) {
+
+            String goodsId = str.getGoodsId();
+            Store byId = storeMapper.findById(goodsId);
+            //增加对应库存
+            Integer num = Integer.parseInt(byId.getCont()) + Integer.parseInt(str.getCounts());
+            ShoppingCart cart = new ShoppingCart();
+            cart.setCounts(String.valueOf(num));
+            cart.setGoodsId(goodsId);
+            shoppingCartMapper.updateAddCount(cart);
+        }
+        //删除对应的所有订单
+        int i = orderMapper.deleteByCheckId(orderNumber);
+        if (i == 1) {
+            check.setMsg("退单成功！");
+        } else {
+            check.setMsg("退单失败！");
+        }
+        return check;
+    }
+    //退单，根据订单号查询
+    @Override
+    public List<OrderDTO> findByOrderNumber(String orderNumber) {
+
+        //查询该订单号的所有订单
+        List<OrderDTO> list = orderMapper.findAll(orderNumber);
+        return list;
+    }
 }

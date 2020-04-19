@@ -1,5 +1,6 @@
 package cn.chzu.buildingmaterials.salesworkflow.service;
 
+import cn.chzu.buildingmaterials.order.model.OrderDTO;
 import cn.chzu.buildingmaterials.salesworkflow.model.Check;
 import cn.chzu.buildingmaterials.salesworkflow.model.CheckVO;
 import cn.chzu.buildingmaterials.shoppingcart.model.ShoppingCart;
@@ -36,4 +37,10 @@ public interface SalesWorkflowService {
 
     //结算页面，根据id批量删除
     public ShoppingCart batchDeletionById(List<ShoppingCart> list);
+
+    //退单，根据订单号
+    public Check chargebackByOrderNumber(String orderNumber);
+
+    //退单，根据订单号查询
+    public List<OrderDTO> findByOrderNumber(String orderNumber);
 }
