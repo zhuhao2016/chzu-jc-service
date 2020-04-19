@@ -64,6 +64,7 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
     @Override
     public Check checkEmployee(String accountId) {
         Check check = new Check();
+
         //获取所有下单信息
         List<ShoppingCart> allByShoppingCartId = shoppingCartMapper.findAllByShoppingCartId(accountId);
         if (allByShoppingCartId.isEmpty()) {
@@ -79,9 +80,11 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
             String goodsId = str.getGoodsId();
             Store byId = storeMapper.findById(goodsId);
             //减少对应商品库存
-            int num = Integer.parseInt(byId.getCont()) - Integer.parseInt(str.getCounts());
+            Integer num = Integer.parseInt(byId.getSalesNumber());
+            Integer i = Integer.parseInt(str.getCounts());
+            String s = String.valueOf(num + i);
             Store store = new Store();
-            store.setCont(String.valueOf(num));
+            store.setSalesNumber(s);
             store.setId(goodsId);
             //更新库存
             storeMapper.updateSalesNumber(store);
@@ -93,6 +96,7 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
             orderDTO.setAccountId(orderNumber);
             orderDTO.setGoodsName(str.getGoodsName());
             orderDTO.setSalesPrice(str.getSalesPrice());
+            orderDTO.setImg(str.getImg());
             int Tol = Integer.parseInt(str.getSalesPrice()) * Integer.parseInt(str.getCounts());
             orderDTO.setTotalPrice(String.valueOf(Tol));
             orderDTO.setCounts(str.getCounts());
@@ -233,7 +237,7 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
         Check check = new Check();
         //查询该订单号的所有订单
         List<OrderDTO> list = orderMapper.findAll(orderNumber);
-        if (list.isEmpty()){
+        if (list.isEmpty()) {
             check.setMsg("订单号错误，请重新输入！");
             return check;
         }
@@ -258,6 +262,7 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
         }
         return check;
     }
+
     //退单，根据订单号查询
     @Override
     public List<OrderDTO> findByOrderNumber(String orderNumber) {
