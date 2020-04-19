@@ -18,6 +18,9 @@ public class Manage {
     //订单总金额
     private int orderTotalAmount;
 
+    //现有商品总数
+    private int goodsNumber;
+
     public int getClientNumber() {
         return clientNumber;
     }
@@ -42,12 +45,21 @@ public class Manage {
         this.orderTotalAmount = orderTotalAmount;
     }
 
+    public int getGoodsNumber() {
+        return goodsNumber;
+    }
+
+    public void setGoodsNumber(int goodsNumber) {
+        this.goodsNumber = goodsNumber;
+    }
+
     @Override
     public String toString() {
         return "Manage{" +
                 "clientNumber=" + clientNumber +
                 ", orderNumber=" + orderNumber +
                 ", orderTotalAmount=" + orderTotalAmount +
+                ", goodsNumber=" + goodsNumber +
                 '}';
     }
 }

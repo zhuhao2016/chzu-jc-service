@@ -48,6 +48,8 @@ public class ManageServiceImpl implements ManageService {
         int clientNumber = 0;
         int orderNumber = 0;
         int orderTotalAmount = 0;
+        int goodsNumber = 0;
+
         //获取所有客户信息
         List<WxUser> allWxUser = wxUserMapper.findAllWxUser();
         for (WxUser str : allWxUser) {
@@ -60,9 +62,14 @@ public class ManageServiceImpl implements ManageService {
             Integer salesPrice = Integer.valueOf(str.getSalesPrice());
             orderTotalAmount = orderTotalAmount + salesPrice;
         }
+
+        //获取所有商品信息
+        List<Store> all = storeMapper.findAll("太平建材市场");
+        goodsNumber = all.size();
         manage.setClientNumber(clientNumber);
         manage.setOrderNumber(orderNumber);
         manage.setOrderTotalAmount(orderTotalAmount);
+        manage.setGoodsNumber(goodsNumber);
         return manage;
     }
 
@@ -117,7 +124,6 @@ public class ManageServiceImpl implements ManageService {
     //店铺每天销售额、毛利润、销售笔数、客单价分析
     @Override
     public List<StoreAnalysis> salesAnalysis(List<StoreAnalysis> analysis) {
-
 
 
         List<StoreAnalysis> list = new ArrayList<>();
