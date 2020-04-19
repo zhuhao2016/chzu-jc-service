@@ -2,6 +2,7 @@ package cn.chzu.buildingmaterials.salesworkflow.service;
 
 import cn.chzu.buildingmaterials.salesworkflow.model.Check;
 import cn.chzu.buildingmaterials.salesworkflow.model.CheckVO;
+import cn.chzu.buildingmaterials.shoppingcart.model.ShoppingCart;
 import cn.chzu.buildingmaterials.storegoods.model.StoreVo;
 
 import java.util.List;
@@ -30,4 +31,9 @@ public interface SalesWorkflowService {
     //商品加入购物车
     public Check addCar(Check check);
 
+    //结算页面列表渲染,根据员工的账号id查询
+    public List<ShoppingCart> settlementListRendering(String accountId);
+
+    //结算页面，根据id批量删除
+    public ShoppingCart batchDeletionById(List<ShoppingCart> list);
 }

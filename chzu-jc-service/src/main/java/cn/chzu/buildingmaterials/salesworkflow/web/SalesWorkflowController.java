@@ -3,6 +3,7 @@ package cn.chzu.buildingmaterials.salesworkflow.web;
 import cn.chzu.buildingmaterials.salesworkflow.model.Check;
 import cn.chzu.buildingmaterials.salesworkflow.model.CheckVO;
 import cn.chzu.buildingmaterials.salesworkflow.service.SalesWorkflowService;
+import cn.chzu.buildingmaterials.shoppingcart.model.ShoppingCart;
 import cn.chzu.buildingmaterials.storegoods.model.StoreVo;
 import cn.chzu.conf.common.ReqObject;
 import cn.chzu.conf.common.ResObject;
@@ -101,5 +102,43 @@ public class SalesWorkflowController {
         Check object = data.getObject();
         Check check = salesWorkflowService.addCar(object);
         return new ResObject<>(null, check);
+    }
+
+    /**
+     * @param request
+     * @param response
+     * @param data
+     * @return cn.chzu.conf.common.ResObject<java.util.List < cn.chzu.buildingmaterials.shoppingcart.model.ShoppingCart>>
+     * @Title settlementListRendering
+     * @description 结算页面列表渲染, 根据员工的账号id查询
+     * @author zhu_hao
+     * @date 2020/4/19 13:56
+     */
+    @RequestMapping(value = "/settlementListRendering", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObject<List<ShoppingCart>> settlementListRendering(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<Check> data) {
+
+        String accountId = data.getObject().getAccountId();
+        List<ShoppingCart> list = salesWorkflowService.settlementListRendering(accountId);
+        return new ResObject<>(null, list);
+    }
+
+    /**
+     * @param request
+     * @param response
+     * @param data
+     * @return cn.chzu.conf.common.ResObject<cn.chzu.buildingmaterials.shoppingcart.model.ShoppingCart>
+     * @Title batchDeletionById
+     * @description 结算页面，根据id批量删除
+     * @author zhu_hao
+     * @date 2020/4/19 14:04
+     */
+    @RequestMapping(value = "/batchDeletionById", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObject<ShoppingCart> batchDeletionById(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<List<ShoppingCart>> data) {
+
+        List<ShoppingCart> object = data.getObject();
+        ShoppingCart shoppingCart = salesWorkflowService.batchDeletionById(object);
+        return new ResObject<>(null, shoppingCart);
     }
 }

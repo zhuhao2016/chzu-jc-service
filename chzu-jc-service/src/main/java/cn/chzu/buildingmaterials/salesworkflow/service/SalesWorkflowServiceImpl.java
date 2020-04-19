@@ -192,7 +192,7 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
             } else {
                 check.setMsg("添加失败!");
             }
-        }else {
+        } else {
             //该商品已存在购物车中，修改购物车中商品数量
             Integer count = Integer.valueOf(byGoodsName.getCounts());
             //每次点击count数量加一
@@ -209,5 +209,26 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
         }
 
         return check;
+    }
+
+    //结算页面列表渲染,根据员工的账号id查询
+    @Override
+    public List<ShoppingCart> settlementListRendering(String accountId) {
+
+        List<ShoppingCart> list = shoppingCartMapper.findAllByShoppingCartId(accountId);
+        return list;
+    }
+
+    //结算页面，根据id批量删除
+    @Override
+    public ShoppingCart batchDeletionById(List<ShoppingCart> list) {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        int i = shoppingCartMapper.batchDelete(list);
+        if (i == 1) {
+            shoppingCart.setMsg("删除成功！");
+        } else {
+            shoppingCart.setMsg("删除失败，您选择的商品已不在购物车！");
+        }
+        return shoppingCart;
     }
 }
