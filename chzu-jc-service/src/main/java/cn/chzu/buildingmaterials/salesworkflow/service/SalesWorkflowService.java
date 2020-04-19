@@ -20,7 +20,7 @@ public interface SalesWorkflowService {
     public List<StoreVo> findAllStore();
 
     //线下员工结单操作,已确认支付
-    public CheckVO checkEmployee(List<Check> checkList);
+    public Check checkEmployee(String accountId);
 
     //消单-->取消订单、增加库存、退还金额
     public CheckVO cancellation(CheckVO checkVO);

@@ -62,56 +62,50 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
 
     //线下员工结单操作已确认支付
     @Override
-    public CheckVO checkEmployee(List<Check> checkList) {
+    public Check checkEmployee(String accountId) {
+        Check check = new Check();
+        //获取所有下单信息
+        List<ShoppingCart> allByShoppingCartId = shoppingCartMapper.findAllByShoppingCartId(accountId);
+        if (allByShoppingCartId.isEmpty()) {
+            check.setMsg("订单中还没有商品，快去加入商品吧！");
+            return check;
+        }
 
-        CheckVO checkVO = new CheckVO();
-        ArrayList<Check> list = new ArrayList<>();
-        double sum = 0;
         //生成结算单号
-        String accountId = UUID.getUUID();
+        String orderNumber = "No." + UUID.getUUID();
         //遍历list集合
-        for (Check str : checkList) {
-            Check check = new Check();
-            Store store = new Store();
-            String id = str.getId();
-            //查询计量单位
-            Store byId = storeMapper.findById(id);
-            String measure = byId.getMeasure();
-            check.setId(id);
-            check.setGoodsName(str.getGoodsName());
-            check.setSalesPrice(str.getSalesPrice());
-            check.setMeasure(measure);
-            check.setCount(str.getCount());
-            check.setSalesPriceSum(str.getSalesPriceSum());
-            sum = sum + Double.parseDouble(str.getSalesPriceSum());
+        for (ShoppingCart str : allByShoppingCartId) {
 
+            String goodsId = str.getGoodsId();
+            Store byId = storeMapper.findById(goodsId);
             //减少对应商品库存
-            int num = Integer.parseInt(byId.getCont()) - Integer.parseInt(str.getCount());
+            int num = Integer.parseInt(byId.getCont()) - Integer.parseInt(str.getCounts());
+            Store store = new Store();
             store.setCont(String.valueOf(num));
-            store.setId(id);
+            store.setId(goodsId);
+            //更新库存
             storeMapper.updateSalesNumber(store);
             //生成对应订单
             OrderDTO orderDTO = new OrderDTO();
             //生成订单时间
             String time = CurrentTime.newTime();
             orderDTO.setId(UUID.getUUID());
-            orderDTO.setAccountId(accountId);
+            orderDTO.setAccountId(orderNumber);
             orderDTO.setGoodsName(str.getGoodsName());
             orderDTO.setSalesPrice(str.getSalesPrice());
-            orderDTO.setTotalPrice(str.getSalesPriceSum());
-            orderDTO.setCounts(str.getCount());
-            orderDTO.setGoodsId(str.getId());
+            int Tol = Integer.parseInt(str.getSalesPrice()) * Integer.parseInt(str.getCounts());
+            orderDTO.setTotalPrice(String.valueOf(Tol));
+            orderDTO.setCounts(str.getCounts());
+            orderDTO.setGoodsId(str.getGoodsId());
             orderDTO.setStoreName("太平建材市场");
             orderDTO.setCreateTime(time);
             orderDTO.setStatus("线下售卖");
             orderMapper.createOrder(orderDTO);
-            list.add(check);
+
         }
-        checkVO.setCheckId(accountId);
-        checkVO.setSalesSum(String.valueOf(sum));
-        checkVO.setCheck(list);
-        checkVO.setMsg("结算成功，请打印销售凭据！");
-        return checkVO;
+
+        check.setMsg("结算成功，请打印销售凭据！");
+        return check;
     }
 
     //消单-->取消订单、增加库存、退还金额

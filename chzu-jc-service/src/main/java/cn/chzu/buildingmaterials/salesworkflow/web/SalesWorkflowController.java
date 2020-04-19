@@ -53,17 +53,17 @@ public class SalesWorkflowController {
      * @param data
      * @return cn.chzu.conf.common.ResObject<cn.chzu.buildingmaterials.salesworkflow.model.Check>
      * @Title checkEmployee
-     * @description 线下员工结单操作, 已确认支付//操作流程，点击结算，放出二维码，支付成功点击确认 调用接口
+     * @description 结算
      * @author zhu_hao
      * @date 2020/3/23 15:27
      */
     @RequestMapping(value = "/checkEmployee", method = RequestMethod.POST)
     @ResponseBody
-    public ResObject<CheckVO> checkEmployee(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<List<Check>> data) {
+    public ResObject<Check> checkEmployee(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<Check> data) {
 
-        List<Check> list = data.getObject();
-        CheckVO checkVO = salesWorkflowService.checkEmployee(list);
-        return new ResObject<>(null, checkVO);
+        String accountId = data.getObject().getAccountId();
+        Check check = salesWorkflowService.checkEmployee(accountId);
+        return new ResObject<>(null, check);
     }
 
     /**
