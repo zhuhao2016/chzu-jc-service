@@ -43,6 +43,16 @@ public class WordController {
     @Autowired
     ShoppingCartMapper shoppingCartMapper;
 
+    /**
+     * @Title returnWord
+     * @description 打印凭证
+     * @author zhu_hao
+     * @date 2020/4/20 15:53
+     * @param request
+     * @param response
+     * @param data
+     * @return void
+     */
     @RequestMapping("/getWord")
     public void returnWord(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<Check> data) throws Exception {
 
