@@ -93,6 +93,9 @@ public class ManageServiceImpl implements ManageService {
             //获取商品id,查询该商品的进价
             String goodsId = str.getGoodsId();
             Store byId = storeMapper.findById(goodsId);
+            if (byId == null) {
+                continue;
+            }
             //获取进价
             double price = Double.parseDouble(byId.getPrice());
             //获取数量
