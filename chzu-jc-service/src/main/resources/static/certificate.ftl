@@ -980,127 +980,128 @@
                 </w:tr>
 
                 <#list listInfo as list>
-                <w:tr wsp:rsidR="00E07511" wsp:rsidRPr="00E07511" wsp:rsidTr="00E07511">
-                    <w:trPr>
-                        <w:jc w:val="center"/>
-                    </w:trPr>
-                    <w:tc>
-                        <w:tcPr>
-                            <w:tcW w:w="1659" w:type="dxa"/>
-                            <w:shd w:val="clear" w:color="auto" w:fill="F2F2F2"/>
-                        </w:tcPr>
-                        <w:p wsp:rsidR="00164DB8" wsp:rsidRPr="00E07511" wsp:rsidRDefault="00164DB8"
-                             wsp:rsidP="00E07511">
-                            <w:pPr>
-                                <w:jc w:val="center"/>
-                                <w:rPr>
-                                    <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体"/>
-                                    <wx:font wx:val="宋体"/>
-                                    <w:b/>
-                                    <w:b-cs/>
-                                    <w:sz w:val="28"/>
-                                    <w:sz-cs w:val="32"/>
-                                </w:rPr>
-                            </w:pPr>
-                            <w:r wsp:rsidRPr="00E07511">
-                                <w:rPr>
-                                    <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial"/>
-                                    <wx:font wx:val="Arial"/>
-                                    <w:color w:val="333333"/>
-                                    <w:sz-cs w:val="21"/>
-                                    <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
-                                </w:rPr>
-                                <w:t>${list.goodsName}</w:t>
-                            </w:r>
-                        </w:p>
-                    </w:tc>
-                    <w:tc>
-                        <w:tcPr>
-                            <w:tcW w:w="1659" w:type="dxa"/>
-                            <w:shd w:val="clear" w:color="auto" w:fill="F2F2F2"/>
-                        </w:tcPr>
-                        <w:p wsp:rsidR="00164DB8" wsp:rsidRPr="00E07511" wsp:rsidRDefault="00164DB8"
-                             wsp:rsidP="00E07511">
-                            <w:pPr>
-                                <w:jc w:val="center"/>
-                                <w:rPr>
-                                    <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体"/>
-                                    <wx:font wx:val="宋体"/>
-                                    <w:sz w:val="28"/>
-                                    <w:sz-cs w:val="32"/>
-                                </w:rPr>
-                            </w:pPr>
-                            <w:r wsp:rsidRPr="00E07511">
-                                <w:rPr>
-                                    <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial"/>
-                                    <wx:font wx:val="Arial"/>
-                                    <w:color w:val="333333"/>
-                                    <w:sz-cs w:val="21"/>
-                                    <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
-                                </w:rPr>
-                                <w:t>${list.salesPrice}</w:t>
-                            </w:r>
-                        </w:p>
-                    </w:tc>
-                    <w:tc>
-                        <w:tcPr>
-                            <w:tcW w:w="1659" w:type="dxa"/>
-                            <w:shd w:val="clear" w:color="auto" w:fill="F2F2F2"/>
-                        </w:tcPr>
-                        <w:p wsp:rsidR="00164DB8" wsp:rsidRPr="00E07511" wsp:rsidRDefault="00164DB8"
-                             wsp:rsidP="00E07511">
-                            <w:pPr>
-                                <w:jc w:val="center"/>
-                                <w:rPr>
-                                    <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体"/>
-                                    <wx:font wx:val="宋体"/>
-                                    <w:sz w:val="28"/>
-                                    <w:sz-cs w:val="32"/>
-                                </w:rPr>
-                            </w:pPr>
-                            <w:r wsp:rsidRPr="00E07511">
-                                <w:rPr>
-                                    <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial"/>
-                                    <wx:font wx:val="Arial"/>
-                                    <w:color w:val="333333"/>
-                                    <w:sz-cs w:val="21"/>
-                                    <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
-                                </w:rPr>
-                                <w:t>${list.counts}</w:t>
-                            </w:r>
-                        </w:p>
-                    </w:tc>
-                    <w:tc>
-                        <w:tcPr>
-                            <w:tcW w:w="1659" w:type="dxa"/>
-                            <w:shd w:val="clear" w:color="auto" w:fill="F2F2F2"/>
-                        </w:tcPr>
-                        <w:p wsp:rsidR="00164DB8" wsp:rsidRPr="00E07511" wsp:rsidRDefault="00164DB8"
-                             wsp:rsidP="00E07511">
-                            <w:pPr>
-                                <w:jc w:val="center"/>
-                                <w:rPr>
-                                    <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体"/>
-                                    <wx:font wx:val="宋体"/>
-                                    <w:sz w:val="28"/>
-                                    <w:sz-cs w:val="32"/>
-                                </w:rPr>
-                            </w:pPr>
-                            <w:r wsp:rsidRPr="00E07511">
-                                <w:rPr>
-                                    <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial"/>
-                                    <wx:font wx:val="Arial"/>
-                                    <w:color w:val="333333"/>
-                                    <w:sz-cs w:val="21"/>
-                                    <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
-                                </w:rPr>
-                                <w:t>${list.totalPrice}</w:t>
-                            </w:r>
-                        </w:p>
-                    </w:tc>
-                </w:tr>
+                    <w:tr wsp:rsidR="00E07511" wsp:rsidRPr="00E07511" wsp:rsidTr="00E07511">
+                        <w:trPr>
+                            <w:jc w:val="center"/>
+                        </w:trPr>
+                        <w:tc>
+                            <w:tcPr>
+                                <w:tcW w:w="1659" w:type="dxa"/>
+                                <w:shd w:val="clear" w:color="auto" w:fill="F2F2F2"/>
+                            </w:tcPr>
+                            <w:p wsp:rsidR="00164DB8" wsp:rsidRPr="00E07511" wsp:rsidRDefault="00164DB8"
+                                 wsp:rsidP="00E07511">
+                                <w:pPr>
+                                    <w:jc w:val="center"/>
+                                    <w:rPr>
+                                        <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体"/>
+                                        <wx:font wx:val="宋体"/>
+                                        <w:b/>
+                                        <w:b-cs/>
+                                        <w:sz w:val="28"/>
+                                        <w:sz-cs w:val="32"/>
+                                    </w:rPr>
+                                </w:pPr>
+                                <w:r wsp:rsidRPr="00E07511">
+                                    <w:rPr>
+                                        <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial"/>
+                                        <wx:font wx:val="Arial"/>
+                                        <w:color w:val="333333"/>
+                                        <w:sz-cs w:val="21"/>
+                                        <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
+                                    </w:rPr>
+                                    <w:t>${list.goodsName}</w:t>
+                                </w:r>
+                            </w:p>
+                        </w:tc>
+                        <w:tc>
+                            <w:tcPr>
+                                <w:tcW w:w="1659" w:type="dxa"/>
+                                <w:shd w:val="clear" w:color="auto" w:fill="F2F2F2"/>
+                            </w:tcPr>
+                            <w:p wsp:rsidR="00164DB8" wsp:rsidRPr="00E07511" wsp:rsidRDefault="00164DB8"
+                                 wsp:rsidP="00E07511">
+                                <w:pPr>
+                                    <w:jc w:val="center"/>
+                                    <w:rPr>
+                                        <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体"/>
+                                        <wx:font wx:val="宋体"/>
+                                        <w:sz w:val="28"/>
+                                        <w:sz-cs w:val="32"/>
+                                    </w:rPr>
+                                </w:pPr>
+                                <w:r wsp:rsidRPr="00E07511">
+                                    <w:rPr>
+                                        <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial"/>
+                                        <wx:font wx:val="Arial"/>
+                                        <w:color w:val="333333"/>
+                                        <w:sz-cs w:val="21"/>
+                                        <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
+                                    </w:rPr>
+                                    <w:t>${list.salesPrice}</w:t>
+                                </w:r>
+                            </w:p>
+                        </w:tc>
+                        <w:tc>
+                            <w:tcPr>
+                                <w:tcW w:w="1659" w:type="dxa"/>
+                                <w:shd w:val="clear" w:color="auto" w:fill="F2F2F2"/>
+                            </w:tcPr>
+                            <w:p wsp:rsidR="00164DB8" wsp:rsidRPr="00E07511" wsp:rsidRDefault="00164DB8"
+                                 wsp:rsidP="00E07511">
+                                <w:pPr>
+                                    <w:jc w:val="center"/>
+                                    <w:rPr>
+                                        <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体"/>
+                                        <wx:font wx:val="宋体"/>
+                                        <w:sz w:val="28"/>
+                                        <w:sz-cs w:val="32"/>
+                                    </w:rPr>
+                                </w:pPr>
+                                <w:r wsp:rsidRPr="00E07511">
+                                    <w:rPr>
+                                        <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial"/>
+                                        <wx:font wx:val="Arial"/>
+                                        <w:color w:val="333333"/>
+                                        <w:sz-cs w:val="21"/>
+                                        <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
+                                    </w:rPr>
+                                    <w:t>${list.counts}</w:t>
+                                </w:r>
+                            </w:p>
+                        </w:tc>
+                        <w:tc>
+                            <w:tcPr>
+                                <w:tcW w:w="1659" w:type="dxa"/>
+                                <w:shd w:val="clear" w:color="auto" w:fill="F2F2F2"/>
+                            </w:tcPr>
+                            <w:p wsp:rsidR="00164DB8" wsp:rsidRPr="00E07511" wsp:rsidRDefault="00164DB8"
+                                 wsp:rsidP="00E07511">
+                                <w:pPr>
+                                    <w:jc w:val="center"/>
+                                    <w:rPr>
+                                        <w:rFonts w:ascii="宋体" w:fareast="宋体" w:h-ansi="宋体"/>
+                                        <wx:font wx:val="宋体"/>
+                                        <w:sz w:val="28"/>
+                                        <w:sz-cs w:val="32"/>
+                                    </w:rPr>
+                                </w:pPr>
+                                <w:r wsp:rsidRPr="00E07511">
+                                    <w:rPr>
+                                        <w:rFonts w:ascii="Arial" w:h-ansi="Arial" w:cs="Arial"/>
+                                        <wx:font wx:val="Arial"/>
+                                        <w:color w:val="333333"/>
+                                        <w:sz-cs w:val="21"/>
+                                        <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
+                                    </w:rPr>
+                                    <w:t>${list.totalPrice}</w:t>
+                                </w:r>
+                            </w:p>
+                        </w:tc>
+                    </w:tr>
+                </#list>
             </w:tbl>
-            </#list>
+
 
             <w:p wsp:rsidR="00164DB8" wsp:rsidRDefault="00164DB8" wsp:rsidP="00164DB8">
                 <w:pPr>

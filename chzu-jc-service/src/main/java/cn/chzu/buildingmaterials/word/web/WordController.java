@@ -3,15 +3,12 @@ package cn.chzu.buildingmaterials.word.web;
 
 import cn.chzu.buildingmaterials.order.dao.OrderMapper;
 import cn.chzu.buildingmaterials.order.model.OrderDTO;
-import cn.chzu.buildingmaterials.salesworkflow.model.Check;
 import cn.chzu.buildingmaterials.shoppingcart.dao.ShoppingCartMapper;
-import cn.chzu.conf.common.ReqObject;
 import cn.chzu.conf.util.time.CurrentTime;
 import cn.chzu.conf.util.word.DownloadUtil;
 import cn.chzu.conf.util.word.WordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,22 +41,22 @@ public class WordController {
     ShoppingCartMapper shoppingCartMapper;
 
     /**
-     * @Title returnWord
-     * @description 打印凭证
-     * @author zhu_hao
-     * @date 2020/4/20 15:53
      * @param request
      * @param response
      * @param data
      * @return void
+     * @Title returnWord
+     * @description 打印凭证
+     * @author zhu_hao
+     * @date 2020/4/20 15:53
      */
     @RequestMapping("/getWord")
-    public void returnWord(HttpServletRequest request, HttpServletResponse response, @RequestBody ReqObject<Check> data) throws Exception {
+    public void returnWord(HttpServletRequest request, HttpServletResponse response, String orderNumber, String accountId) throws Exception {
 
         //获取订单号
-        String orderNumber = data.getObject().getOrderNumber();
+        //String orderNumber = data.getObject().getOrderNumber();
         //获取员工id,及购物车id
-        String accountId = data.getObject().getAccountId();
+        // String accountId = data.getObject().getAccountId();
         Integer total = 0;
         //生成订单时间
         String time = CurrentTime.newTime();
