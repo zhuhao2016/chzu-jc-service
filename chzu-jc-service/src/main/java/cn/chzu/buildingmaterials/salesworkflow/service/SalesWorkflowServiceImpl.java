@@ -109,6 +109,7 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
         }
 
         check.setMsg("结算成功，请打印销售凭据！");
+        check.setOrderNumber(orderNumber);
         return check;
     }
 

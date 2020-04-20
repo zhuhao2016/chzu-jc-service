@@ -75,5 +75,11 @@
 		where shopping_cart_id = #{shoppingCartId,jdbcType=VARCHAR}
 		order by id desc
 	</select>
+
+    <!--员工根据员工的id删除所有相关商品-->
+    <delete id="deleteByAccountId">
+        delete from shoppingcart
+        where shopping_cart_id = #{shoppingCartId,jdbcType=VARCHAR}
+    </delete>
 </mapper>
 

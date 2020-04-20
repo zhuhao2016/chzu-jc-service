@@ -33,4 +33,7 @@ public interface ShoppingCartMapper {
 
     //结算订单时删除单个购物车商品
     public int delete(String id);
+
+    //员工根据员工的id删除所有相关商品
+    public int deleteByAccountId(String shoppingCartId);
 }
