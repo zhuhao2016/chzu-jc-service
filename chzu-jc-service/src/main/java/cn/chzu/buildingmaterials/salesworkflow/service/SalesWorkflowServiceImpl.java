@@ -264,11 +264,7 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
         }
         //删除对应的所有订单
         int i = orderMapper.deleteByCheckId(orderNumber);
-        if (i == 1) {
-            check.setMsg("退单成功！");
-        } else {
-            check.setMsg("退单失败！");
-        }
+        check.setMsg("退单成功！");
         return check;
     }
 
