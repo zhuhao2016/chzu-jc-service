@@ -1,7 +1,5 @@
 package cn.chzu.buildingmaterials.manage.model;
 
-import cn.chzu.base.model.Prompt;
-
 /**
  * @description: 待处理事务
  * @author: zhu_hao
@@ -9,7 +7,7 @@ import cn.chzu.base.model.Prompt;
  * @version: 1.0.0
  * @modified By:
  */
-public class Business extends Prompt {
+public class Business{
 
     //待发货数量
     private int toBeDelivered;
