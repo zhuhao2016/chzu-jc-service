@@ -248,6 +248,9 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
             String goodsId = str.getGoodsId();
             Store byId = storeMapper.findById(goodsId);
             //增加对应库存
+            if (byId == null) {
+                continue;
+            }
             Integer num = Integer.parseInt(byId.getCont()) + Integer.parseInt(str.getCounts());
             ShoppingCart cart = new ShoppingCart();
             cart.setCounts(String.valueOf(num));
