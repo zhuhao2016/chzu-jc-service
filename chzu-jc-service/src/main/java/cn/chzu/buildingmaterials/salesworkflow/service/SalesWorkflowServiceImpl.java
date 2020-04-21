@@ -263,7 +263,7 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
             shoppingCartMapper.updateAddCount(cart);
         }
         //删除对应的所有订单
-        int i = orderMapper.deleteByCheckId(orderNumber);
+        orderMapper.deleteByCheckId(orderNumber);
         check.setMsg("退单成功！");
         return check;
     }
