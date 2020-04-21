@@ -251,9 +251,14 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
             if (byId == null) {
                 continue;
             }
-            Integer num = Integer.parseInt(byId.getCont()) + Integer.parseInt(str.getCounts());
+
+            Integer num1 = Integer.valueOf(byId.getSalesNumber());
+            Integer num2 = Integer.parseInt(str.getCounts());
+
+            String num = String.valueOf(num1 + num2);
+
             ShoppingCart cart = new ShoppingCart();
-            cart.setCounts(String.valueOf(num));
+            cart.setCounts(num);
             cart.setGoodsId(goodsId);
             shoppingCartMapper.updateAddCount(cart);
         }
