@@ -1,6 +1,7 @@
 package cn.chzu.buildingmaterials.manage.service;
 
 
+import cn.chzu.buildingmaterials.manage.model.Business;
 import cn.chzu.buildingmaterials.manage.model.Manage;
 import cn.chzu.buildingmaterials.manage.model.StoreAnalysis;
 import cn.chzu.buildingmaterials.order.dao.OrderMapper;
@@ -190,5 +191,46 @@ public class ManageServiceImpl implements ManageService {
             list.add(storeAnalysis);
         }
         return list;
+    }
+
+    //待处理事务
+    @Override
+    public Business pendingTransaction() {
+
+        Business business = new Business();
+        //获取所有订单
+        List<OrderDTO> allBackstage = orderMapper.findAllBackstage();
+        if (allBackstage.size() == 0) {
+            business.setToBeDelivered(0);
+            business.setShippedNum(0);
+            business.setClosedOrdersNum(0);
+            business.setSalesOfflineNum(0);
+            return business;
+        }
+        //待发货数量
+        int toBeDelivered = 0;
+        //已发货数量
+        int shippedNum = 0;
+        //已关闭订单数
+        int closedOrdersNum = 0;
+        //已完成线下售卖数
+        int salesOfflineNum = 0;
+        for (OrderDTO str : allBackstage) {
+            String status = str.getStatus();
+            if (status.equals("待发货")) {
+                toBeDelivered++;
+            } else if (status.equals("已发货")) {
+                shippedNum++;
+            } else if (status.equals("已关闭订单")) {
+                closedOrdersNum++;
+            } else {
+                salesOfflineNum++;
+            }
+        }
+        business.setToBeDelivered(toBeDelivered);
+        business.setShippedNum(shippedNum);
+        business.setClosedOrdersNum(closedOrdersNum);
+        business.setSalesOfflineNum(salesOfflineNum);
+        return business;
     }
 }

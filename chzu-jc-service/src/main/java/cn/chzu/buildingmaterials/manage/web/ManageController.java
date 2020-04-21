@@ -1,6 +1,7 @@
 package cn.chzu.buildingmaterials.manage.web;
 
 
+import cn.chzu.buildingmaterials.manage.model.Business;
 import cn.chzu.buildingmaterials.manage.model.Manage;
 import cn.chzu.buildingmaterials.manage.model.StoreAnalysis;
 import cn.chzu.buildingmaterials.manage.service.ManageService;
@@ -80,5 +81,22 @@ public class ManageController {
         List<StoreAnalysis> object = data.getObject();
         List<StoreAnalysis> storeAnalyses = manageService.salesAnalysis(object);
         return new ResObject<>(null, storeAnalyses);
+    }
+
+    /**
+     * @param request
+     * @param response
+     * @return cn.chzu.conf.common.ResObject<cn.chzu.buildingmaterials.manage.model.Business>
+     * @Title pendingTransaction
+     * @description 待处理事务
+     * @author zhu_hao
+     * @date 2020/4/21 10:38
+     */
+    @RequestMapping(value = "/pendingTransaction", method = RequestMethod.POST)
+    @ResponseBody
+    public ResObject<Business> pendingTransaction(HttpServletRequest request, HttpServletResponse response) {
+
+        Business business = manageService.pendingTransaction();
+        return new ResObject<>(null, business);
     }
 }

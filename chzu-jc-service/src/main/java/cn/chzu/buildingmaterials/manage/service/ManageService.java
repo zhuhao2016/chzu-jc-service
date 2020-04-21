@@ -1,6 +1,7 @@
 package cn.chzu.buildingmaterials.manage.service;
 
 
+import cn.chzu.buildingmaterials.manage.model.Business;
 import cn.chzu.buildingmaterials.manage.model.Manage;
 import cn.chzu.buildingmaterials.manage.model.StoreAnalysis;
 
@@ -24,4 +25,6 @@ public interface ManageService {
     //各个店铺每天销售额、毛利润、销售笔数、客单价分析
     public List<StoreAnalysis> salesAnalysis(List<StoreAnalysis> analysis);
 
+    //待处理事务
+    public Business pendingTransaction();
 }
