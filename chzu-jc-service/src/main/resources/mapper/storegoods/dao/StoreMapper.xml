@@ -50,7 +50,8 @@
 
     <!-- 查询所有,并排序 -->
     <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.String">
-		select *
+		select
+		<include refid="Base_Column_List"/>
 		from storegoodslist
 		where store_name = #{storeName,jdbcType=VARCHAR}
 		order by priority desc
@@ -58,7 +59,8 @@
 
     <!-- 商品名模糊查询 -->
     <select id="findByGoodsName" resultMap="BaseResultMap" parameterType="java.lang.String">
-		select *
+		select
+		<include refid="Base_Column_List"/>
 		from storegoodslist
 		where goods_name like '%${goodsName,jdbcType=VARCHAR}%'
 		order by id desc
@@ -110,7 +112,8 @@
 
 	<!-- 查询商品库存 -->
 	<select id="findSalesNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
-		select *
+		select
+		<include refid="Base_Column_List"/>
 		from storegoodslist
 		where id = #{id,jdbcType=VARCHAR}
 	</select>

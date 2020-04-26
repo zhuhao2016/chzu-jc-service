@@ -67,7 +67,8 @@
 
 	<!-- 账号登录 -->
 	<select id="login" resultMap="BaseResultMap" parameterType="cn.chzu.buildingmaterials.wxuser.model.WxUser">
-		select *
+		select
+		<include refid="Base_Column_List"/>
 		from wxuser
 		<where>
 			loginType = #{loginType,jdbcType=VARCHAR}

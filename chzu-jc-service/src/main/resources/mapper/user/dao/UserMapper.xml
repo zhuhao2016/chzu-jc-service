@@ -47,7 +47,8 @@
 
     <!-- 后台用户登录 -->
     <select id="login" resultMap="BaseResultMap" parameterType="cn.chzu.buildingmaterials.user.model.User">
-        select *
+        select
+        <include refid="Base_Column_List"/>
         from user
         <where>
             <if test="username != null">
