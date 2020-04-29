@@ -112,8 +112,8 @@
         <include refid="Base_Column_List"/>
         from orders
         where
-        userName like '%${userName,jdbcType=VARCHAR}%' or storeName like '%${storeName,jdbcType=VARCHAR}%' or status
-        like '%${status,jdbcType=VARCHAR}%'
+        userName like  CONCAT('%',#{userName,jdbcType=VARCHAR},'%') or storeName like  CONCAT('%',#{storeName,jdbcType=VARCHAR},'%') or status
+        like  CONCAT('%',#{status,jdbcType=VARCHAR},'%')
     </select>
 
     <!-- 根据店铺名查询所有订单 -->
