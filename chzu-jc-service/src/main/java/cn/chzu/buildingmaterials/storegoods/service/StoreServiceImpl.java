@@ -83,7 +83,7 @@ public class StoreServiceImpl implements StoreService {
     public List<Store> findByGoodsName(String goodsName) {
 
         String logic = "1";
-        return storeMapper.findByGoodsName(goodsName,logic);
+        return storeMapper.findByGoodsName(goodsName, logic);
     }
 
     // 删除单个商品
@@ -122,7 +122,8 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public List<StoreVo> findAllKind(String kind) {
         List<StoreVo> list = new ArrayList<>();
-        List<Store> allKind = storeMapper.findAllKind(kind);
+        String logic = "1";
+        List<Store> allKind = storeMapper.findAllKind(kind, logic);
         for (Store str : allKind) {
             StoreVo storeVo = new StoreVo();
             storeVo.setId(str.getId());

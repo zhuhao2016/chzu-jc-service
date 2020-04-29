@@ -44,7 +44,7 @@ public interface StoreMapper {
     public void updateSalesNumber(Store store);
 
     //根据分类类型查询该类型所有信息
-    public List<Store> findAllKind(String kind);
+    public List<Store> findAllKind(String kind, String logic);
 
     //查询商品库存
     public Store findSalesNumber(Store store);
