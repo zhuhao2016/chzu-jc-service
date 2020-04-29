@@ -35,6 +35,8 @@ public class Store extends Prompt {
     private String image;
     //商品推荐优先级
     private String priority;
+    //逻辑删除
+    private String logic;
 
     public String getId() {
         return id;
@@ -132,6 +134,14 @@ public class Store extends Prompt {
         this.priority = priority;
     }
 
+    public String getLogic() {
+        return logic;
+    }
+
+    public void setLogic(String logic) {
+        this.logic = logic;
+    }
+
     @Override
     public String toString() {
         return "Store{" +
@@ -147,6 +157,7 @@ public class Store extends Prompt {
                 ", cont='" + cont + '\'' +
                 ", image='" + image + '\'' +
                 ", priority='" + priority + '\'' +
+                ", logic='" + logic + '\'' +
                 '}';
     }
 }

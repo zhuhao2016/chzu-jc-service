@@ -107,7 +107,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public List<StoreVo> recommend() {
 
 
-        List<Store> all = storeMapper.findAll("太平建材市场");
+        List<Store> all = storeMapper.findAllDelete("太平建材市场","1");
         ArrayList<StoreVo> list = new ArrayList<>();
         for (Store str : all) {
             StoreVo storeVo = new StoreVo();

@@ -3,6 +3,7 @@ package cn.chzu.buildingmaterials.storegoods.dao;
 
 import cn.chzu.buildingmaterials.storegoods.model.Store;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,11 +22,17 @@ public interface StoreMapper {
     //查询所有，分页展示
     public List<Store> findAll(String storeName);
 
+    //查询所有，分页展示,筛选逻辑删除
+    public List<Store> findAllDelete(String storeName, String logic);
+
+    // 逻辑删除
+    public int updateByDelete(Store store);
+
     //根据GoodsName查询
     public Store findGoodsName(String goodsName);
 
     //商品名模糊查询
-    public List<Store> findByGoodsName(String classification);
+    public List<Store> findByGoodsName(@Param("goodsName") String classification, @Param("logic") String logic);
 
     // 删除单个商品
     public int delete(String id);

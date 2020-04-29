@@ -60,6 +60,7 @@ public class StoreServiceImpl implements StoreService {
             store.setImage(pathURL + saveFile);
             //设置默认优先级
             store.setPriority("100");
+            store.setLogic("1");
             storeMapper.add(store);
             store.setMsg("成功新增商品！");
         }
@@ -73,14 +74,16 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public List<Store> findAll(String storeName) {
 
-        return storeMapper.findAll(storeName);
+        String logic = "1";
+        return storeMapper.findAllDelete(storeName, logic);
     }
 
     //商品名模糊查询
     @Override
     public List<Store> findByGoodsName(String goodsName) {
 
-        return storeMapper.findByGoodsName(goodsName);
+        String logic = "1";
+        return storeMapper.findByGoodsName(goodsName,logic);
     }
 
     // 删除单个商品
@@ -88,8 +91,11 @@ public class StoreServiceImpl implements StoreService {
     public Store delete(String id) {
 
         Store store = new Store();
-        int delete = storeMapper.delete(id);
-        if (delete == 1) {
+        // int delete = storeMapper.delete(id);
+        store.setId(id);
+        store.setLogic("0");
+        int i = storeMapper.updateByDelete(store);
+        if (i == 1) {
             store.setMsg("删除成功！");
         } else {
             store.setMsg("删除失败！");

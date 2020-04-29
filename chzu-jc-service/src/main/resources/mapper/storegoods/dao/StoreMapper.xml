@@ -10,21 +10,22 @@
         <result column="sales_price" property="salesPrice" jdbcType="VARCHAR"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
         <result column="kind" property="kind" jdbcType="VARCHAR"/>
-		<result column="measure" property="measure" jdbcType="VARCHAR"/>
-		<result column="image" property="image" jdbcType="VARCHAR"/>
-		<result column="priority" property="priority" jdbcType="VARCHAR"/>
+        <result column="measure" property="measure" jdbcType="VARCHAR"/>
+        <result column="image" property="image" jdbcType="VARCHAR"/>
+        <result column="priority" property="priority" jdbcType="VARCHAR"/>
+        <result column="logic" property="logic" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
 		id, store_name, goods_name, sales_number, price,
-		sales_price, remarks, kind, measure, image, priority
+		sales_price, remarks, kind, measure, image, priority, logic
 	</sql>
 
     <!-- 新增商品 -->
     <insert id="add" parameterType="cn.chzu.buildingmaterials.storegoods.model.Store">
 		insert into storegoodslist
 			(id, store_name, goods_name, sales_number, price,
-		sales_price, remarks, kind, measure, image, priority)
+		sales_price, remarks, kind, measure, image, priority, logic)
 		values (
 		#{id,jdbcType=VARCHAR},
 		#{storeName,jdbcType=VARCHAR},
@@ -36,7 +37,8 @@
 		#{kind,jdbcType=VARCHAR},
 		#{measure,jdbcType=VARCHAR},
 		#{image,jdbcType=VARCHAR},
-		#{priority,jdbcType=VARCHAR}
+		#{priority,jdbcType=VARCHAR},
+		#{logic,jdbcType=VARCHAR}
 		)
 	</insert>
 
@@ -50,21 +52,31 @@
 
     <!-- 查询所有,并排序 -->
     <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from storegoodslist
+        where store_name = #{storeName,jdbcType=VARCHAR}
+        order by priority desc
+    </select>
+
+
+    <!-- 总店查询所有,排序,筛选出逻辑删除的 -->
+    <select id="findAllDelete" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select
-		<include refid="Base_Column_List"/>
+        <include refid="Base_Column_List"/>
 		from storegoodslist
-		where store_name = #{storeName,jdbcType=VARCHAR}
-		order by priority desc
+		where store_name = #{storeName,jdbcType=VARCHAR} and logic = #{logic,jdbcType=VARCHAR}
+		order by id desc
 	</select>
 
     <!-- 商品名模糊查询 -->
     <select id="findByGoodsName" resultMap="BaseResultMap" parameterType="java.lang.String">
-		select
-		<include refid="Base_Column_List"/>
-		from storegoodslist
-		where goods_name like '%${goodsName,jdbcType=VARCHAR}%'
-		order by id desc
-	</select>
+        select
+        <include refid="Base_Column_List"/>
+        from storegoodslist
+        where goods_name like CONCAT('%',#{goodsName,jdbcType=VARCHAR},'%') and logic = #{logic,jdbcType=VARCHAR}
+        order by id desc
+    </select>
 
     <!-- 删除单个商品 -->
     <delete id="delete" parameterType="java.lang.String">
@@ -72,67 +84,77 @@
 		where id = #{id,jdbcType=VARCHAR}
 	</delete>
 
+    <!--逻辑删除-->
+    <update id="updateByDelete" parameterType="cn.chzu.buildingmaterials.storegoods.model.Store">
+        update storegoodslist
+        <set>
+            <if test="logic != null">
+                logic = #{logic,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
     <!-- 根据id修改 -->
-	<update id="updateById" parameterType="cn.chzu.buildingmaterials.storegoods.model.Store">
-			update storegoodslist
-			<set>
-				<if test="salesNumber != null">
-					sales_number = #{salesNumber,jdbcType=VARCHAR},
-				</if>
-				<if test="price != null">
-					price = #{price,jdbcType=VARCHAR},
-				</if>
-				<if test="salesPrice != null">
-					sales_price = #{salesPrice,jdbcType=VARCHAR},
-				</if>
-				<if test="remarks != null">
-					remarks = #{remarks,jdbcType=VARCHAR},
-				</if>
-				<if test="kind != null">
-					kind = #{kind,jdbcType=VARCHAR},
-				</if>
-				<if test="measure != null">
-					measure = #{measure,jdbcType=VARCHAR},
-				</if>
-			</set>
-			where id = #{id,jdbcType=VARCHAR}
-	</update>
+    <update id="updateById" parameterType="cn.chzu.buildingmaterials.storegoods.model.Store">
+        update storegoodslist
+        <set>
+            <if test="salesNumber != null">
+                sales_number = #{salesNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=VARCHAR},
+            </if>
+            <if test="salesPrice != null">
+                sales_price = #{salesPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="kind != null">
+                kind = #{kind,jdbcType=VARCHAR},
+            </if>
+            <if test="measure != null">
+                measure = #{measure,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 
-	<!-- 更新库存(只更新库存) -->
-	<update id="updateSalesNumber" parameterType="cn.chzu.buildingmaterials.storegoods.model.Store">
-		update storegoodslist
-		<set>
-			<if test="salesNumber != null">
-				sales_number = #{salesNumber,jdbcType=VARCHAR},
-			</if>
-		</set>
-		where id = #{id,jdbcType=VARCHAR}
-	</update>
+    <!-- 更新库存(只更新库存) -->
+    <update id="updateSalesNumber" parameterType="cn.chzu.buildingmaterials.storegoods.model.Store">
+        update storegoodslist
+        <set>
+            <if test="salesNumber != null">
+                sales_number = #{salesNumber,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 
 
-	<!-- 查询商品库存 -->
-	<select id="findSalesNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
-		select
-		<include refid="Base_Column_List"/>
-		from storegoodslist
-		where id = #{id,jdbcType=VARCHAR}
-	</select>
+    <!-- 查询商品库存 -->
+    <select id="findSalesNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from storegoodslist
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
 
-	<!-- 根据分类类型查询该类型所有信息 -->
-	<select id="findAllKind" resultMap="BaseResultMap" parameterType="java.lang.String">
-		select
-		<include refid="Base_Column_List"/>
-		from storegoodslist
-		where kind = #{kind,jdbcType=VARCHAR}
-		order by id desc
-	</select>
+    <!-- 根据分类类型查询该类型所有信息 -->
+    <select id="findAllKind" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from storegoodslist
+        where kind = #{kind,jdbcType=VARCHAR} and logic = #{logic,jdbcType=VARCHAR}
+        order by id desc
+    </select>
 
-	<!-- 根据id查询 -->
-	<select id="findById" resultMap="BaseResultMap" parameterType="java.lang.String">
-		select
-		<include refid="Base_Column_List"/>
-		from storegoodslist
-		where id = #{id,jdbcType=VARCHAR}
-	</select>
+    <!-- 根据id查询 -->
+    <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from storegoodslist
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
 </mapper>
 
