@@ -223,10 +223,10 @@ public class SalesWorkflowServiceImpl implements SalesWorkflowService {
     public ShoppingCart batchDeletionById(List<ShoppingCart> list) {
         ShoppingCart shoppingCart = new ShoppingCart();
         int i = shoppingCartMapper.batchDelete(list);
-        if (i == 1) {
-            shoppingCart.setMsg("删除成功！");
-        } else {
+        if (i == 0) {
             shoppingCart.setMsg("删除失败，您选择的商品已不在购物车！");
+        } else {
+            shoppingCart.setMsg("删除成功！");
         }
         return shoppingCart;
     }
