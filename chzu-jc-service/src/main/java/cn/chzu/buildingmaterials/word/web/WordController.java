@@ -52,18 +52,12 @@ public class WordController {
      */
     @RequestMapping("/getWord")
     public void returnWord(HttpServletRequest request, HttpServletResponse response, String orderNumber, String accountId) throws Exception {
-
-        //获取订单号
-        //String orderNumber = data.getObject().getOrderNumber();
-        //获取员工id,及购物车id
-        // String accountId = data.getObject().getAccountId();
         Integer total = 0;
         //生成订单时间
         String time = CurrentTime.newTime();
         Map<String, Object> map = new HashMap<>();
         map.put("orderNumber", orderNumber);
         map.put("date", time);
-
         //获取所有该订单号的订单
         List<OrderDTO> listInfo = orderMapper.findAll(orderNumber);
         //计算总价
