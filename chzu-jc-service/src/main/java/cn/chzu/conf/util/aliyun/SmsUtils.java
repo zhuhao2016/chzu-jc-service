@@ -22,8 +22,8 @@ public class SmsUtils {
     //产品域名,开发者无需替换
     static final String domain = "dysmsapi.aliyuncs.com";
     // 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)，非常重要。不要泄露给其他人
-    static final String accessKeyId = "LTAI4FjcHSePKZXGrrMhvhVo";
-    static final String accessKeySecret = "c5PUaFHT0w39dIs6IhRnp3Ou9IQAmG";
+    static final String accessKeyId = "";
+    static final String accessKeySecret = "";
 
     /**
      * 发送手机短信的方法
